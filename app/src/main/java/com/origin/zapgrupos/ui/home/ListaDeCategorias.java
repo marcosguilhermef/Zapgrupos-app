@@ -1,6 +1,10 @@
 package com.origin.zapgrupos.ui.home;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +13,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.origin.zapgrupos.Models.Categorias.CategoriaDataModel;
 import com.origin.zapgrupos.R;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 public class ListaDeCategorias  extends BaseAdapter {
@@ -19,6 +27,7 @@ public class ListaDeCategorias  extends BaseAdapter {
     private List<CategoriaDataModel> listData;
     private LayoutInflater layoutInflater;
     private Context context;
+    private ViewHolder holder;
 
     public ListaDeCategorias(Context aContext,  List<CategoriaDataModel> listData) {
         this.context = aContext;
@@ -41,8 +50,9 @@ public class ListaDeCategorias  extends BaseAdapter {
         return position;
     }
 
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+
         if (convertView == null) {
             
             convertView = layoutInflater.inflate(R.layout.list_item_categoria, null);
@@ -59,9 +69,18 @@ public class ListaDeCategorias  extends BaseAdapter {
         holder.TituloCategoriaView.setText(categoria.getCategoria());
         holder.DescricacaoView.setText(categoria.getDescricao());
         holder.categoriaView.setTag(categoria.getID());
-        //int imageId = this.getMipmapResIdByName(categoria.getImg().toString());
 
-        //holder.categoriaView.setImageResource(imageId);
+        try{
+            holder.url = categoria.getImg()[0];
+            holder.id = categoria.getID();
+            Glide.with(context)
+                    .load(holder.url)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .into(holder.categoriaView);
+        }catch (Exception e){
+            holder.categoriaView.setImageResource(R.drawable.ic_launcher_foreground);
+        }
 
         return convertView;
     }
@@ -78,6 +97,10 @@ public class ListaDeCategorias  extends BaseAdapter {
         ImageView categoriaView;
         TextView TituloCategoriaView;
         TextView DescricacaoView;
+        String url;
+        String id;
+        Bitmap bitmap;
     }
 
 }
+
