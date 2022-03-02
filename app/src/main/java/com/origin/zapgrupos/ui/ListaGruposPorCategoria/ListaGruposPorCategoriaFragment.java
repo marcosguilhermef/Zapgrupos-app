@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +16,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import com.origin.zapgrupos.R;
+import com.origin.zapgrupos.models.Categorias.CategoriaDataModel;
+import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Grupo;
 import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.ListaDeGrupos;
 import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Repository.Requests;
 import com.origin.zapgrupos.databinding.FragmentListaGruposPorCategoriaBinding;
@@ -32,8 +38,13 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     private onChangeTitle mListener;
     private ListaDeGruposPorCategoriaViewModel viewModel;
     private Requests Request;
+    private Bundle bundle;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if(savedInstanceState == null){
+            bundle = new Bundle();
+        }
+
         viewModel = new ViewModelProvider(this).get(ListaDeGruposPorCategoriaViewModel.class);
 
         mListener.onFragmentInteraction(getArguments().getString("categoria"));
@@ -54,6 +65,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
                 MontarListaDeGrupos(grupos);
             }
         });
+        binding.listViewGrupos.setOnItemClickListener(onClickItemCategory());
 
         return root;
     }
@@ -86,11 +98,30 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
         listView.setAdapter(new com.origin.zapgrupos.ui.ListaGruposPorCategoria.ListaDeGruposAdapter(getActivity(), grupos.getData()));
     }
 
+    private AdapterView.OnItemClickListener onClickItemCategory(){
+        return new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                Log.i("clicou", "Clicou e funcionou");
+                Object o = binding.listViewGrupos.getItemAtPosition(position);
+                Grupo group = (Grupo) o;
+                bundle.putString("titulo",group.getTitulo());
+                bundle.putString("url",group.getUrl());
+                bundle.putString("img",group.getImg().get(0));
+                bundle.putString("categoria",group.getCategoria());
+                bundle.putString("descricao",group.getDescricao());
+                Navigation.findNavController(v).navigate(R.id.nav_grupo, bundle);
+            }
+        };
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
         viewModel.setCategoria(null);
+        viewModel.setDownloaded(false);
+
     }
 
     @Override

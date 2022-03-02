@@ -1,7 +1,107 @@
 package com.origin.zapgrupos.ui.grupo;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class GrupoFragment extends Fragment {
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.origin.zapgrupos.R;
+import com.origin.zapgrupos.databinding.FragmentGrupoBinding;
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link GrupoFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class GrupoFragment extends Fragment {
+    private FragmentGrupoBinding binding;
+
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "titulo";
+    private static final String ARG_PARAM2 = "url";
+    private static final String ARG_PARAM3 = "img";
+    private static final String ARG_PARAM4 = "descricao";
+    private static final String ARG_PARAM5 = "categoria";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+    private String mParam3;
+    private String mParam4;
+    private String mParam5;
+
+    public GrupoFragment() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment GrupoFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static GrupoFragment newInstance(String param1, String param2) {
+        GrupoFragment fragment = new GrupoFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam3 = getArguments().getString(ARG_PARAM3);
+            mParam4 = getArguments().getString(ARG_PARAM4);
+            mParam5 = getArguments().getString(ARG_PARAM5);
+
+        }
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentGrupoBinding.inflate(inflater, container, false);
+
+        binding.grupoTitulo.setText(mParam1 == null ? "" : mParam1);
+        binding.grupoDescricao.setText(mParam4 == null ? "" : mParam4);
+
+        Glide.with(getContext())
+                .load(mParam3)
+                .centerCrop()
+                .placeholder(R.drawable.ic_baseline_error_outline_24)
+                .into(binding.grupoImagem);
+        binding.EntrarButton.setOnClickListener( new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent viewIntent =
+                        new Intent("android.intent.action.VIEW",
+                                Uri.parse( mParam2 ));
+                startActivity(viewIntent);
+
+            }
+        }  );
+
+        View view = binding.getRoot();
+        //binding.grupoTitulo.setText(mParam1 == null ? "" : mParam1);
+        //binding.grupoTitulo.setText(mParam1 == null ? "" : mParam1);
+
+        // Inflate the layout for this fragment
+        return view;
+    }
 }

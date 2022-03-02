@@ -35,9 +35,42 @@
         android:id="@+id/nav_lista_grupos_por_categoria"
         android:name="com.origin.zapgrupos.ui.ListaGruposPorCategoria.ListaGruposPorCategoriaFragment"
         android:label="@string/title_nav"
-        tools:layout="@layout/fragment_lista_grupos_por_categoria" >
+        tools:layout="@layout/fragment_lista_grupos_por_categoria">
         <argument
             android:name="_id"
             app:argType="string" />
+        <action
+            android:id="@+id/nav_informacoes_do_grupo"
+            app:destination="@id/nav_grupo"
+            />
+
+    </fragment>
+    <fragment
+        android:id="@+id/nav_grupo"
+        android:name="com.origin.zapgrupos.ui.grupo.GrupoFragment"
+        android:label="@string/title_nav"
+        tools:layout="@layout/fragment_grupo" >
+        <argument
+            android:name="titulo"
+            app:argType="string"
+            app:nullable="true"
+            />
+        <argument
+            android:name="categoria"
+            app:argType="string"
+            app:nullable="true"
+            />
+        <argument
+            android:name="descricao"
+            app:argType="string"
+            app:nullable="true"/>
+        <argument
+            android:name="url"
+            app:argType="string"
+            app:nullable="true"/>
+        <argument
+            android:name="img"
+            app:argType="string"
+            app:nullable="true"/>
     </fragment>
 </navigation>
