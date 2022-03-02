@@ -1,10 +1,7 @@
 package com.origin.zapgrupos.ui.home;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.origin.zapgrupos.Models.Categorias.CategoriaDataModel;
+import com.origin.zapgrupos.models.Categorias.CategoriaDataModel;
 import com.origin.zapgrupos.R;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
 public class ListaDeCategorias  extends BaseAdapter {
@@ -79,7 +73,7 @@ public class ListaDeCategorias  extends BaseAdapter {
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .into(holder.categoriaView);
         }catch (Exception e){
-            holder.categoriaView.setImageResource(R.drawable.ic_launcher_foreground);
+            holder.categoriaView.setImageResource(R.drawable.ic_baseline_error_outline_24);
         }
 
         return convertView;

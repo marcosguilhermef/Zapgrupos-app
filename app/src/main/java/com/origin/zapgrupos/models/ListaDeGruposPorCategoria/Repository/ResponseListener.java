@@ -1,4 +1,4 @@
-package com.origin.zapgrupos.Models.Categorias.Repository;
+package com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Repository;
 
 
 import android.util.Log;
@@ -7,17 +7,16 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.android.volley.Response.Listener;
 import com.google.gson.Gson;
-import com.origin.zapgrupos.Models.Categorias.CategoriaModel;
+import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.ListaDeGrupos;
 
 import org.json.JSONObject;
 
 
 public class ResponseListener implements Listener<JSONObject> {
-    private CategoriaModel response;
+    private ListaDeGrupos response;
     private Requests r;
-    final MutableLiveData<CategoriaModel> mutableLiveData = new MutableLiveData<>();
-    Class Model;
-    private CategoriaModel instance;
+    final MutableLiveData<ListaDeGrupos> mutableLiveData = new MutableLiveData<>();
+    private ListaDeGrupos instance;
 
     ResponseListener(Requests r){
         Log.i("ResponseListener", "resposta de sucesso disparada");
@@ -28,15 +27,15 @@ public class ResponseListener implements Listener<JSONObject> {
     public void onResponse(JSONObject response) {
         Log.i("resposta",response.toString());
         Gson g = new Gson();
-        CategoriaModel modelJson = g.fromJson(response.toString(),CategoriaModel.class);
+        ListaDeGrupos modelJson = g.fromJson(response.toString(),ListaDeGrupos.class);
         setResponse(modelJson);
         setResponseLiveData(modelJson);
     }
-    private void setResponse(CategoriaModel response){
+    private void setResponse(ListaDeGrupos response){
         this.response = response;
     }
 
-    public void setResponseLiveData(CategoriaModel response){
+    public void setResponseLiveData(ListaDeGrupos response){
         try{
             mutableLiveData.setValue(response);
         }catch (Exception e){
@@ -45,11 +44,11 @@ public class ResponseListener implements Listener<JSONObject> {
         }
     }
 
-    public MutableLiveData<CategoriaModel> getResponselivedata(){
+    public MutableLiveData<ListaDeGrupos> getResponselivedata(){
         return mutableLiveData;
     }
 
-    public CategoriaModel getResponse(){
+    public ListaDeGrupos getResponse(){
         return response;
     }
 

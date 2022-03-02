@@ -1,4 +1,4 @@
-package com.origin.zapgrupos.Models.Categorias.Repository;
+package com.origin.zapgrupos.models.Categorias.Repository;
 
 import android.util.Log;
 

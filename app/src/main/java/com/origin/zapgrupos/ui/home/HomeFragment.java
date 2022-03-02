@@ -14,17 +14,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
-import com.origin.zapgrupos.Models.Categorias.CategoriaDataModel;
-import com.origin.zapgrupos.Models.Categorias.CategoriaModel;
-import com.origin.zapgrupos.Models.Categorias.Repository.Requests;
+import com.origin.zapgrupos.models.Categorias.CategoriaDataModel;
+import com.origin.zapgrupos.models.Categorias.CategoriaModel;
+import com.origin.zapgrupos.models.Categorias.Repository.Requests;
+import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentHomeBinding;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 public class HomeFragment extends Fragment {
@@ -34,7 +34,13 @@ public class HomeFragment extends Fragment {
     private ListView listView;
     final private String url = "https://zapgrupos.xyz/api/mais";
     private Requests Request;
+    private Bundle bundle;
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if(savedInstanceState == null){
+            bundle = new Bundle();
+        }
+
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
@@ -45,6 +51,7 @@ public class HomeFragment extends Fragment {
         //final TextView textView = binding.textHome;
         listView = binding.listView;
         final ProgressBar progressBar = binding.progressBar;
+
         homeViewModel.getDownloaded().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean b) {
@@ -64,34 +71,9 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
-    private void MontarListaDeCategorias(CategoriaModel categoriaModel){
-        listView = binding.listView;
-        homeViewModel.setDownloaded(true);
-        List<CategoriaDataModel> ListaDecategorias = categoriaModel.getData();
-        ArrayAdapter<CategoriaDataModel> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,ListaDecategorias);
-        listView.setAdapter(new ListaDeCategorias(getActivity(),ListaDecategorias));
-    }
-
-    private AdapterView.OnItemClickListener onClickItemCategory(){
-        return new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Object o = listView.getItemAtPosition(position);
-                CategoriaDataModel cat = (CategoriaDataModel) o;
-                Toast.makeText(getContext(), "Selected :" + " " + cat.getCategoria(), Toast.LENGTH_LONG).show();
-            }
-        };
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
 
     private void makeRequest(){
         homeViewModel.setCategoria(getCategoriaModelLiveData());
-        homeViewModel.getCategoria();
     }
 
     private MutableLiveData<CategoriaModel> getCategoriaModelLiveData(){
@@ -106,5 +88,33 @@ public class HomeFragment extends Fragment {
         }
         return homeViewModel.getCategoria();
     }
+
+    private void MontarListaDeCategorias(CategoriaModel categoriaModel){
+        listView = binding.listView;
+        homeViewModel.setDownloaded(true);
+        //ArrayAdapter<CategoriaDataModel> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,categoriaModel.getData());
+        listView.setAdapter(new ListaDeCategorias(getActivity(),categoriaModel.getData()));
+    }
+
+    private AdapterView.OnItemClickListener onClickItemCategory(){
+        return new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                Object o = listView.getItemAtPosition(position);
+                CategoriaDataModel cat = (CategoriaDataModel) o;
+                Toast.makeText(getContext(), "Categoria:" + " " + cat.getCategoria(), Toast.LENGTH_LONG).show();
+                bundle.putString("categoria",cat.getCategoria());
+                Navigation.findNavController(v).navigate(R.id.nav_lista_grupos_por_categoria, bundle);
+            }
+        };
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+
 
 }

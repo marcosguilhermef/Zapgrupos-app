@@ -1,4 +1,4 @@
-package com.origin.zapgrupos.Models.Categorias;
+package com.origin.zapgrupos.models.Categorias;
 import java.net.URL;
 import java.util.List;
 

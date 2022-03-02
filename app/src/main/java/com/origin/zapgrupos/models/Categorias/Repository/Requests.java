@@ -1,4 +1,4 @@
-package com.origin.zapgrupos.Models.Categorias.Repository;
+package com.origin.zapgrupos.models.Categorias.Repository;
 
 import android.content.Context;
 
@@ -9,7 +9,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.origin.zapgrupos.Models.Categorias.CategoriaModel;
+import com.origin.zapgrupos.models.Categorias.CategoriaModel;
 
 import java.net.URL;
 

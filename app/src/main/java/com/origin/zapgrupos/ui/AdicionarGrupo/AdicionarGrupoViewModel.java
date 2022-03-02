@@ -10,7 +10,7 @@ public class AdicionarGrupoViewModel extends ViewModel {
 
     public AdicionarGrupoViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("Recurso aindanão está disponível");
     }
 
     public LiveData<String> getText() {

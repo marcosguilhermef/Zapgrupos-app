@@ -5,11 +5,19 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
 
+    <action android:id="@+id/nav_add_group_button"
+        app:destination="@+id/nav_adicionar_grupo"/>
+
     <fragment
         android:id="@+id/nav_home"
         android:name="com.origin.zapgrupos.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_lista_grupos_por_categoria2"
+            app:destination="@id/nav_lista_grupos_por_categoria"
+            app:enterAnim="@android:anim/accelerate_decelerate_interpolator" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_adicionar_grupo"
@@ -22,4 +30,14 @@
         android:name="com.origin.zapgrupos.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_lista_grupos_por_categoria"
+        android:name="com.origin.zapgrupos.ui.ListaGruposPorCategoria.ListaGruposPorCategoriaFragment"
+        android:label="@string/title_nav"
+        tools:layout="@layout/fragment_lista_grupos_por_categoria" >
+        <argument
+            android:name="_id"
+            app:argType="string" />
+    </fragment>
 </navigation>
