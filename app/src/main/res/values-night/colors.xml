@@ -2,7 +2,7 @@
 <resources>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
+    <color name="purple_700">#000</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
@@ -10,6 +10,7 @@
     <color name="SlateGray">#708090</color>
     <color name="LightSteelBlue">#B0C4DE</color>
     <color name="Gainsboro">#DCDCDC</color>
-    <color name="mtlr_filled_strock_color">#FF000000</color>
-    <color name="mtlr_btn_text_color_selector">#fff</color>
+    <color name="mtlr_filled_strock_color">#FF03DAC5</color>
+    <color name="mtlr_btn_text_color_selector">#FF03DAC5</color>
+
 </resources>

@@ -16,17 +16,14 @@ public class ResponseListener implements Listener<JSONObject> {
     private CategoriaModel response;
     private Requests r;
     final MutableLiveData<CategoriaModel> mutableLiveData = new MutableLiveData<>();
-    Class Model;
     private CategoriaModel instance;
 
     ResponseListener(Requests r){
-        Log.i("ResponseListener", "resposta de sucesso disparada");
         this.r = r;
     }
 
     @Override
     public void onResponse(JSONObject response) {
-        Log.i("resposta",response.toString());
         Gson g = new Gson();
         CategoriaModel modelJson = g.fromJson(response.toString(),CategoriaModel.class);
         setResponse(modelJson);
@@ -41,7 +38,6 @@ public class ResponseListener implements Listener<JSONObject> {
             mutableLiveData.setValue(response);
         }catch (Exception e){
             mutableLiveData.setValue(null);
-            Log.i("carregando", e.getMessage());
         }
     }
 

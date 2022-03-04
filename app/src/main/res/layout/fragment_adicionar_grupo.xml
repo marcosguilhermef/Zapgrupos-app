@@ -6,109 +6,176 @@
     android:layout_height="match_parent"
     tools:context=".ui.AdicionarGrupo.AdicionarGrupoFragment">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextLink"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:hint="@string/imput_link"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextDescricao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:hint="@string/imput_descricao"
-        app:counterEnabled="true"
-        app:counterMaxLength="300"
-        app:layout_constraintTop_toBottomOf="@+id/TextLink"
-        tools:layout_editor_absoluteX="8dp">
-
-        <com.google.android.material.textfield.TextInputEditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/imput_link"
+                app:boxStrokeColor="@color/mtlr_filled_strock_color"
+                app:hintTextColor="@color/mtlr_filled_strock_color"                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextTelefone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:hint="@string/imput_telefone"
-        app:layout_constraintTop_toBottomOf="@+id/TextDescricao"
-        tools:layout_editor_absoluteX="8dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/TextLinkInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextDescricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/imput_descricao"
+                app:boxStrokeColor="@color/mtlr_filled_strock_color"
+                app:hintTextColor="@color/mtlr_filled_strock_color"
+                app:counterEnabled="true"
+                app:counterMaxLength="300"
+                app:layout_constraintTop_toBottomOf="@+id/TextLink"
+                tools:layout_editor_absoluteX="8dp">
 
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/TextDescricaoImput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:hint="@string/imput_email"
-        app:layout_constraintTop_toBottomOf="@+id/TextTelefone"
-        tools:layout_editor_absoluteX="8dp">
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/imput_telefone"
+                app:boxStrokeColor="@color/mtlr_filled_strock_color"
+                app:hintTextColor="@color/mtlr_filled_strock_color"
+                app:layout_constraintTop_toBottomOf="@+id/TextDescricao"
+                tools:layout_editor_absoluteX="8dp">
 
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/TextTelefoneImput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/MenuPais"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/TextEmail"
-        android:hint="@string/menu_pais">
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <AutoCompleteTextView
-            android:id="@+id/MenuPaisContent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/imput_email"
+                app:boxStrokeColor="@color/mtlr_filled_strock_color"
+                app:hintTextColor="@color/mtlr_filled_strock_color"
+                app:layout_constraintTop_toBottomOf="@+id/TextTelefone"
+                tools:layout_editor_absoluteX="8dp">
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/TextEmailImput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-    <Button
-        android:id="@+id/enviraGrupo"
-        android:layout_width="187dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Adicionar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MenuPais" />
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/MenuPais"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/menu_pais"
+                app:boxStrokeColor="@color/mtlr_filled_strock_color"
+                app:hintTextColor="@color/mtlr_filled_strock_color"
+                app:layout_constraintTop_toBottomOf="@+id/TextEmail">
+
+                <AutoCompleteTextView
+                    android:id="@+id/MenuPaisContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/MenuCategoria"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/menu_categoria"
+                app:boxStrokeColor="@color/mtlr_filled_strock_color"
+                app:hintTextColor="@color/mtlr_filled_strock_color"
+                app:layout_constraintTop_toBottomOf="@+id/MenuPais">
+
+                <AutoCompleteTextView
+                    android:id="@+id/MenuCategoriaInputView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/MenuTipo"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/menu_tipo"
+                app:hintTextColor="@color/mtlr_filled_strock_color"
+                app:layout_constraintTop_toBottomOf="@+id/MenuCategoria">
+
+                <AutoCompleteTextView
+                    android:id="@+id/MenuTipoInputView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/enviraGrupo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="Adicionar"
+                android:textColor="@color/mtlr_btn_text_color_selector"
+                app:boxStrokeColor="@color/mtlr_filled_strock_color"
+                app:hintTextColor="@color/mtlr_filled_strock_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/MenuTipo" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

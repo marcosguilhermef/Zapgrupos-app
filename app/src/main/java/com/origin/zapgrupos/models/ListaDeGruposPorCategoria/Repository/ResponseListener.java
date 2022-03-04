@@ -16,10 +16,8 @@ public class ResponseListener implements Listener<JSONObject> {
     private ListaDeGrupos response;
     private Requests r;
     final MutableLiveData<ListaDeGrupos> mutableLiveData = new MutableLiveData<>();
-    private ListaDeGrupos instance;
 
     ResponseListener(Requests r){
-        Log.i("ResponseListener", "resposta de sucesso disparada");
         this.r = r;
     }
 

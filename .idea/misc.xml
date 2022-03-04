@@ -17,7 +17,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23097826086956522" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.23097826086956522" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.23097826086956522" />
-        <entry key="app/src/main/res/layout/fragment_adicionar_grupo.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_adicionar_grupo.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_grupo.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_informacoes_grupo.xml" value="0.1" />
@@ -25,7 +25,7 @@
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.23097826086956522" />
         <entry key="app/src/main/res/layout/list_item_categoria.xml" value="0.21739130434782608" />
         <entry key="app/src/main/res/layout/list_item_grupo.xml" value="0.35572916666666665" />
-        <entry key="app/src/main/res/layout/list_item_pais.xml" value="0.17299898682877407" />
+        <entry key="app/src/main/res/layout/list_item_pais.xml" value="0.33" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.23097826086956522" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/menu/main.xml" value="0.33" />
@@ -40,5 +40,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.22" />
+      </ProjectState>
+    </option>
   </component>
 </project>

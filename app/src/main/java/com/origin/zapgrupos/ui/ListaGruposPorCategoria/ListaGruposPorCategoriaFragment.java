@@ -82,8 +82,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
                         +"?page=1"
                         +"&limit=500";
                 URL urlFormated = new URL(url);
-                Log.i("tentando request:", url.toString());
-                Request = new Requests(urlFormated,getActivity().getApplicationContext(), ListaDeGrupos.class);
+                Request = new Requests(urlFormated,getActivity().getApplicationContext());
                 return Request.rum().getResponseLiveData();
             }catch (MalformedURLException e) {
                 return null;
@@ -105,6 +104,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
                 Log.i("clicou", "Clicou e funcionou");
                 Object o = binding.listViewGrupos.getItemAtPosition(position);
                 Grupo group = (Grupo) o;
+                bundle.putString("_id",group.get_id());
                 bundle.putString("titulo",group.getTitulo());
                 bundle.putString("url",group.getUrl());
                 bundle.putString("img",group.getImg().get(0));

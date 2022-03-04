@@ -72,5 +72,9 @@
             android:name="img"
             app:argType="string"
             app:nullable="true"/>
+        <argument
+            android:name="_id"
+            app:argType="string"
+            app:nullable="true"/>
     </fragment>
 </navigation>

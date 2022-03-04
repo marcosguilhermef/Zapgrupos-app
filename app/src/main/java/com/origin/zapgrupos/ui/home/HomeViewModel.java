@@ -8,7 +8,7 @@ import com.origin.zapgrupos.models.Categorias.CategoriaModel;
 
 public class HomeViewModel extends ViewModel {
 
-    private static MutableLiveData<CategoriaModel> categoria;
+    public static MutableLiveData<CategoriaModel> categoria;
     private static MutableLiveData<Boolean> downloaded;
 
     public HomeViewModel() {

@@ -30,6 +30,7 @@ public class GrupoFragment extends Fragment {
     private static final String ARG_PARAM3 = "img";
     private static final String ARG_PARAM4 = "descricao";
     private static final String ARG_PARAM5 = "categoria";
+    private static final String ARG_PARAM6 = "_id";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -37,6 +38,7 @@ public class GrupoFragment extends Fragment {
     private String mParam3;
     private String mParam4;
     private String mParam5;
+    private String mParam6;
 
     public GrupoFragment() {
         // Required empty public constructor
@@ -69,7 +71,7 @@ public class GrupoFragment extends Fragment {
             mParam3 = getArguments().getString(ARG_PARAM3);
             mParam4 = getArguments().getString(ARG_PARAM4);
             mParam5 = getArguments().getString(ARG_PARAM5);
-
+            mParam6 = getArguments().getString(ARG_PARAM6);
         }
 
     }
@@ -96,6 +98,23 @@ public class GrupoFragment extends Fragment {
 
             }
         }  );
+
+        binding.compartilhar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "" +
+                        "Olá, eu obti esse grupo através do zapgrupos. " +
+                        "Aplicativo que está disponéveil na playstore! " +
+                        "Entre no link abaixo e acesse esse grupo de whatsapp que eu achei legal: " +
+                        "https://zapgrupos.xyz/"+mParam5+"/"+mParam6 );
+                sendIntent.setType("text/plain");
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+
+            }
+        });
 
         View view = binding.getRoot();
         //binding.grupoTitulo.setText(mParam1 == null ? "" : mParam1);

@@ -17,21 +17,16 @@ import java.net.URL;
 
 public class Requests{
     private static Context ctx;
-    private static Requests instance;
     private static RequestQueue requestQueue;
     public final java.net.URL URL;
     private final JsonObjectRequest stringRequest;
-    ListaDeGrupos successResponse;
-    private MutableLiveData multableLiveData;
-    private Class Model;
     private ResponseListener ResponseListener;
     private ResponseErrorListener ResponseErrorListener;
 
-    public Requests(URL url, Context context, Class M) {
+    public Requests(URL url, Context context) {
         Log.i("URL: ",url.toString());
         URL = url;
         ctx = context;
-        Model = M;
         requestQueue = getRequestQueue();
         ResponseListener = new ResponseListener(this);
         ResponseErrorListener = new ResponseErrorListener();
