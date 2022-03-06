@@ -77,4 +77,16 @@
             app:argType="string"
             app:nullable="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/nav_gerar_link"
+        android:name="com.origin.zapgrupos.ui.GerarLink.GerarLinkFragment"
+        android:label="@string/title_gerar_link"
+        tools:layout="@layout/fragment_gerar_link" >
+    </fragment>
+    <fragment
+        android:id="@+id/nav_gerar_mensagem_sem_contato"
+        android:name="com.origin.zapgrupos.ui.MensagemSemContato.MenagemSemContatoFragment"
+        android:label="@string/title_mensagem_sem_contato"
+        tools:layout="@layout/fragment_menagem_sem_contato" >
+    </fragment>
 </navigation>

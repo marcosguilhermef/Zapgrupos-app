@@ -11,6 +11,9 @@
     <string name="menu_gallery">Adicionar grupo</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="title_nav">Lista de grupos</string>
+    <string name="title_gerar_link">Gerar link de mensagem</string>
+    <string name="title_mensagem_sem_contato">Mensagem sem contato</string>
+
     <string name="menu_adicionar_grupo">Adicionar Grupos</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -24,6 +27,14 @@
     <string name="menu_tipo">Tipo</string>
     <string name="pub_id">ca-app-pub-8817634033676287~7981741263</string>
     <string name="pub_me">ca-app-pub-8817634033676287/9748132979</string>
+    <string name="n_mero">Número</string>
+    <string name="texto">Texto</string>
+    <string name="copiar_link">Copiar link</string>
+    <string name="compartilhar">compartilhar</string>
+    <string name="numero_helper">Coloque o número do seu telefone</string>
+    <string name="texto_compartilhar">O texto que você quer compartilhar</string>
+    <string name="abrir_contato">Abrir contato</string>
+    <string name="helper_numero">Coloque o número que você quer se comunicar</string>
 
 
 </resources>
