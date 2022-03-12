@@ -31,6 +31,7 @@ public class GrupoFragment extends Fragment {
     private static final String ARG_PARAM4 = "descricao";
     private static final String ARG_PARAM5 = "categoria";
     private static final String ARG_PARAM6 = "_id";
+    private static final String ARG_PARAM7 = "sensivel";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -39,6 +40,7 @@ public class GrupoFragment extends Fragment {
     private String mParam4;
     private String mParam5;
     private String mParam6;
+    private Boolean mParam7;
 
     public GrupoFragment() {
         // Required empty public constructor
@@ -72,6 +74,7 @@ public class GrupoFragment extends Fragment {
             mParam4 = getArguments().getString(ARG_PARAM4);
             mParam5 = getArguments().getString(ARG_PARAM5);
             mParam6 = getArguments().getString(ARG_PARAM6);
+            mParam7 = getArguments().getBoolean(ARG_PARAM7);
         }
 
     }
@@ -82,12 +85,16 @@ public class GrupoFragment extends Fragment {
 
         binding.grupoTitulo.setText(mParam1 == null ? "" : mParam1);
         binding.grupoDescricao.setText(mParam4 == null ? "" : mParam4);
+        if(mParam7 == false || mParam7 == null){
+            Glide.with(getContext())
+                    .load(mParam3)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_baseline_error_outline_24)
+                    .into(binding.grupoImagem);
+        }{
+            binding.grupoImagem.setImageResource(R.drawable.ic_baseline_error_outline_24);
+        }
 
-        Glide.with(getContext())
-                .load(mParam3)
-                .centerCrop()
-                .placeholder(R.drawable.ic_baseline_error_outline_24)
-                .into(binding.grupoImagem);
         binding.EntrarButton.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View view) {
