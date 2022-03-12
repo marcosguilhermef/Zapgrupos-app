@@ -34,9 +34,9 @@
                     android:id="@+id/numeroImput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/n_mero"
 
-                    />
+                    android:cursorVisible="false"
+                    android:hint="@string/n_mero" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button

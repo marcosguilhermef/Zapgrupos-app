@@ -67,11 +67,16 @@ public class ListaDeGruposAdapter extends BaseAdapter {
         try{
             holder.url = grupo.getImg().get(0);
             holder.id = grupo.get_id();
-            Glide.with(context)
-                    .load(holder.url)
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_baseline_error_outline_24)
-                    .into(holder.imagem);
+            Log.i("imagem", String.valueOf(grupo.getSensivel()));
+            if((grupo.getSensivel() == false) || (grupo.getSensivel() == null)) {
+                Glide.with(context)
+                        .load(holder.url)
+                        .centerCrop()
+                        .placeholder(R.drawable.ic_baseline_error_outline_24)
+                        .into(holder.imagem);
+            }else{
+                holder.imagem.setImageResource(R.drawable.ic_baseline_error_outline_24);
+            }
         }catch (Exception e){
             holder.imagem.setImageResource(R.drawable.ic_baseline_error_outline_24);
         }

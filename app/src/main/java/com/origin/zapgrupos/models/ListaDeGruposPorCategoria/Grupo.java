@@ -10,6 +10,7 @@ public class Grupo {
     public String tipo;
     public String categoria;
     public Integer vizita;
+    public Boolean sensivel;
     public List<String> img;
     public String created_at;
     public String updated_at;
@@ -92,5 +93,13 @@ public class Grupo {
 
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public Boolean getSensivel() {
+        return sensivel;
+    }
+
+    public void setSensivel(Boolean sensivel) {
+        this.sensivel = sensivel;
     }
 }

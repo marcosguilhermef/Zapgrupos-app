@@ -62,7 +62,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/EntrarButton"
                     style="?attr/borderlessButtonStyle"
-                    android:layout_width="360dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:backgroundTint="#38c172"
@@ -70,7 +70,7 @@
                     android:text="Entrar" />
             </LinearLayout>
             <GridLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 >
@@ -78,7 +78,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/compartilhar"
                     style="?attr/borderlessButtonStyle"
-                    android:layout_width="360dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:backgroundTint="#38c172"
