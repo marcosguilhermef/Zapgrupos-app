@@ -35,7 +35,6 @@ public class Requests{
         requestQueue = getRequestQueue();
         ResponseListener = new ResponseListener(this);
         ResponseErrorListener = new ResponseErrorListener();
-        Log.i("corpo: ", body.toString());
         stringRequest = new JsonObjectRequest(
                 Request.Method.POST,url.toString(),
                 body,

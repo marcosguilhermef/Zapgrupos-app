@@ -18,6 +18,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.android.volley.Request;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.models.Categorias.CategoriaDataModel;
 import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Grupo;
@@ -65,8 +67,10 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
                 MontarListaDeGrupos(grupos);
             }
         });
+
         binding.listViewGrupos.setOnItemClickListener(onClickItemCategory());
 
+        binding.listViewGrupos.setOnItemLongClickListener(onPressItemCategory());
         return root;
     }
 
@@ -101,7 +105,6 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
         return new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Log.i("clicou", "Clicou e funcionou");
                 Object o = binding.listViewGrupos.getItemAtPosition(position);
                 Grupo group = (Grupo) o;
                 bundle.putString("_id",group.get_id());
@@ -115,6 +118,38 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
             }
         };
     }
+
+    private AdapterView.OnItemLongClickListener onPressItemCategory(){
+        return new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                new MaterialAlertDialogBuilder(getContext(),R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
+                        .setMessage("Deseja marcar grupo como sensivel?")
+                        .setNegativeButton(R.string.nao_marcar_como_sensivel, (d,w) -> {
+                            d.cancel();
+                        })
+                        .setPositiveButton(R.string.sim_marcar_como_sensivel, (d,w) ->{
+                            Object o = binding.listViewGrupos.getItemAtPosition(i);
+                            Grupo group = (Grupo) o;
+                            requisicaoImagemSensivel(group.get_id());
+                        })
+                        .show();
+                return true;
+            }
+        };
+    }
+
+    private void requisicaoImagemSensivel(String ID){
+        try{
+            final String url = "https://zapgrupos.xyz/api/grupo/sesivel/"+ID;
+            URL urlFormated = new URL(url);
+            Request = new Requests(urlFormated,getActivity().getApplicationContext(), com.android.volley.Request.Method.PATCH).rum();
+        }catch (Exception e) {
+            new MaterialAlertDialogBuilder(getContext(),R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
+                    .setMessage("Aconteceu algum erro no processo de requsição")
+                    .show();
+            }
+        }
 
     @Override
     public void onDestroyView() {
