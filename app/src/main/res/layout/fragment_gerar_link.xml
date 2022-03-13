@@ -34,6 +34,7 @@
                     android:id="@+id/numeroImput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:hint="@string/n_mero"
 
                     />
@@ -56,6 +57,7 @@
                     android:id="@+id/textoImput"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:hint="@string/texto" />
             </com.google.android.material.textfield.TextInputLayout>
 

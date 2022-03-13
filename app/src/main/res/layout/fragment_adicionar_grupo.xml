@@ -24,12 +24,14 @@
                 android:layout_marginEnd="8dp"
                 android:hint="@string/imput_link"
                 app:boxStrokeColor="@color/mtlr_filled_strock_color"
-                app:hintTextColor="@color/mtlr_filled_strock_color"                app:layout_constraintEnd_toEndOf="parent"
+                app:hintTextColor="@color/mtlr_filled_strock_color"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/TextLinkInput"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -51,6 +53,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/TextDescricaoImput"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
@@ -72,6 +75,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/TextTelefoneImput"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
@@ -93,6 +97,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/TextEmailImput"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
@@ -114,6 +119,7 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/MenuPaisContent"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none" />
@@ -135,6 +141,7 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/MenuCategoriaInputView"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none" />
@@ -155,6 +162,7 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/MenuTipoInputView"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none" />
