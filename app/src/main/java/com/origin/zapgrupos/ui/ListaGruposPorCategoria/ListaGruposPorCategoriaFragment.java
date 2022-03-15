@@ -18,6 +18,12 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.models.Categorias.CategoriaDataModel;
 import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Grupo;
@@ -39,6 +45,8 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     private ListaDeGruposPorCategoriaViewModel viewModel;
     private Requests Request;
     private Bundle bundle;
+    private InterstitialAd mInterstitialAd;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(savedInstanceState == null){
@@ -136,6 +144,46 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     }
 
     @Override
+    public void onViewCreated(View view, Bundle bundle){
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(getContext(),getString(R.string.banner_ad_unit_id_intersticial), adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                Log.d("Ads TAG", "The ad was dismissed.");
+                            }
+
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                Log.d("Ads TAG", "The ad failed to show.");
+                            }
+
+                            @Override
+                            public void onAdShowedFullScreenContent() {
+
+                                mInterstitialAd = null;
+                                Log.d("Ads TAG", "The ad was shown.");
+                            }
+                        });
+                        mInterstitialAd.show(getActivity());
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.i("Ads", "mInterstitialAd "+loadAdError.getMessage());
+                        mInterstitialAd = null;
+                    }
+                });
+
+    }
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
@@ -145,6 +193,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     public void onFragmentInteraction(String title) {
 
     }
+
 
     /*public interface OnFragmentInteractionListener {
         public void onFragmentInteraction(String title);

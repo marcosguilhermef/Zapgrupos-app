@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
@@ -13,13 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.gson.Gson;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentAdicionarGrupoBinding;
 import com.origin.zapgrupos.models.AdiconarGrupo.ErrosResponse;
 import com.origin.zapgrupos.models.AdiconarGrupo.SucessoResponse;
 
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -32,11 +33,16 @@ import com.origin.zapgrupos.ui.home.HomeViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+
 public class AdicionarGrupoFragment extends Fragment {
 
     final private String url = "https://zapgrupos.xyz/api/add-grupo";
     private AdicionarGrupoViewModel adicionarGrupoViewModel;
     private FragmentAdicionarGrupoBinding binding;
+    private InterstitialAd mInterstitialAd;
 
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 
@@ -92,6 +98,7 @@ public class AdicionarGrupoFragment extends Fragment {
         binding.MenuPaisContent.setAdapter(pais);
         binding.MenuCategoriaInputView.setAdapter(categorias);
         binding.MenuTipoInputView.setAdapter(tipo);
+
         return root;
     }
 
@@ -205,11 +212,58 @@ public class AdicionarGrupoFragment extends Fragment {
                 .show();
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle bundle){
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(getContext(),getString(R.string.banner_ad_unit_id_intersticial), adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                Log.d("Ads TAG", "The ad was dismissed.");
+                            }
 
-        @Override
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                Log.d("Ads TAG", "The ad failed to show.");
+                            }
+
+                            @Override
+                            public void onAdShowedFullScreenContent() {
+
+                                mInterstitialAd = null;
+                                Log.d("Ads TAG", "The ad was shown.");
+                            }
+                        });
+                        mInterstitialAd.show(getActivity());
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.i("Ads", "mInterstitialAd "+loadAdError.getMessage());
+                        mInterstitialAd = null;
+                    }
+                });
+
+
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+    @Override
+    public void onDetach(){
+        super.onDetach();
+
     }
 
 }
