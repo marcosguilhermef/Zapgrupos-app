@@ -35,6 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/n_mero"
+                    android:textCursorDrawable="@drawable/cursor_color"
 
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -56,7 +57,9 @@
                     android:id="@+id/textoImput"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:hint="@string/texto" />
+                    android:hint="@string/texto"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button

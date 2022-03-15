@@ -5,16 +5,20 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentGerarLinkBinding;
 
 public class GerarLinkFragment extends Fragment {
 
     private FragmentGerarLinkBinding binding;
+    private AdView adView;
 
     public GerarLinkFragment() {
         // Required empty public constructor
@@ -23,6 +27,7 @@ public class GerarLinkFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -47,4 +52,18 @@ public class GerarLinkFragment extends Fragment {
         View view = binding.getRoot();
         return view;
     }
+    @Override
+    public void onViewCreated(View view, Bundle bundle){
+        super.onViewCreated(view,bundle);
+        adView = getActivity().findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+    }
+
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        adView.destroy();
+    }
+
 }

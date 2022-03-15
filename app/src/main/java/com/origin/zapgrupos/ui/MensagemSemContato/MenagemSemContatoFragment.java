@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.origin.zapgrupos.R;
 
 import com.origin.zapgrupos.databinding.FragmentMenagemSemContatoBinding;
@@ -28,6 +30,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 public class MenagemSemContatoFragment extends Fragment {
 
     private FragmentMenagemSemContatoBinding binding;
+    private AdView adView;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -60,6 +64,7 @@ public class MenagemSemContatoFragment extends Fragment {
     }
 
     @Override
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -103,5 +108,18 @@ public class MenagemSemContatoFragment extends Fragment {
 
         View view = binding.getRoot();
         return view;
+    }
+
+    public void onViewCreated(View view, Bundle bundle){
+        super.onViewCreated(view,bundle);
+        adView = getActivity().findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+    }
+
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        adView.destroy();
     }
 }

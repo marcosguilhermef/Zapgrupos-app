@@ -31,7 +31,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/TextLinkInput"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -53,7 +55,7 @@
                     android:id="@+id/TextDescricaoImput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:textCursorDrawable="@drawable/cursor_color"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +76,7 @@
                     android:id="@+id/TextTelefoneImput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:textCursorDrawable="@drawable/cursor_color"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,7 +97,7 @@
                     android:id="@+id/TextEmailImput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:textCursorDrawable="@drawable/cursor_color"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,7 +118,9 @@
                     android:id="@+id/MenuPaisContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -137,7 +141,9 @@
                     android:id="@+id/MenuCategoriaInputView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -157,7 +163,9 @@
                     android:id="@+id/MenuTipoInputView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 

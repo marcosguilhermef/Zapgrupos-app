@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.21302083333333333" />
         <entry key="../../../Data/AndroidSDK/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/drawable-v24/cursor_color.xml" value="0.259375" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.30833333333333335" />
         <entry key="app/src/main/res/drawable/ic_baseline_chat_bubble_24.xml" value="0.19479166666666667" />
         <entry key="app/src/main/res/drawable/ic_baseline_error_outline_24.xml" value="0.2140625" />
@@ -21,7 +22,7 @@
         <entry key="app/src/main/res/layout/content_main.xml" value="0.23097826086956522" />
         <entry key="app/src/main/res/layout/fragment_adicionar_grupo.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_gerar_link.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_grupo.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_grupo.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_informacoes_grupo.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_lista_grupos_por_categoria.xml" value="0.18840579710144928" />
@@ -48,7 +49,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.22" />
+        <option name="scale" value="0.1" />
       </ProjectState>
     </option>
   </component>

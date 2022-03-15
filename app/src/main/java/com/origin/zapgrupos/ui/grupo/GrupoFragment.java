@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentGrupoBinding;
 
@@ -22,6 +24,7 @@ import com.origin.zapgrupos.databinding.FragmentGrupoBinding;
  */
 public class GrupoFragment extends Fragment {
     private FragmentGrupoBinding binding;
+    private AdView adView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,7 +76,6 @@ public class GrupoFragment extends Fragment {
             mParam5 = getArguments().getString(ARG_PARAM5);
             mParam6 = getArguments().getString(ARG_PARAM6);
         }
-
     }
 
     @Override
@@ -122,5 +124,23 @@ public class GrupoFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    public void onViewCreated(View view, Bundle bundle){
+        super.onViewCreated(view,bundle);
+        adView = getActivity().findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+    }
+
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        adView.destroy();
+    }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        adView.destroy();
     }
 }

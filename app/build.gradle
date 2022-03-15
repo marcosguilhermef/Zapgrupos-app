@@ -11,8 +11,8 @@ android {
     defaultConfig {
         applicationId "com.origin.zapgrupos"
         minSdk 24
-        targetSdk 32
-        versionCode 5
+        targetSdk 31
+        versionCode 8
         versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -34,6 +34,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.firebase:firebase-ads:18.3.0'
     def room_version = "2.4.1"
 
     implementation 'androidx.appcompat:appcompat:1.4.1'
