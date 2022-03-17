@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Zapgrupos</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Zapgrupos</string>
+    <string name="nav_header_subtitle"></string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="adicionar_grupo">Feature is not avaibled</string>
+    <string name="menu_home">Groups list</string>
+    <string name="menu_gallery">Add new group</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title_nav">Groups List</string>
+    <string name="title_gerar_link">Generate shareable link</string>
+    <string name="title_mensagem_sem_contato">Contactless contact</string>
+    <string name="menu_adicionar_grupo">Add new group</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="imput_link">Link</string>
+    <string name="imput_descricao">Description</string>
+    <string name="imput_telefone">Number Phone</string>
+    <string name="imput_email">Email</string>
+    <string name="menu_pais">Country</string>
+    <string name="mensagem_sucesso">Your group has been successfully added!</string>
+    <string name="menu_categoria">Category</string>
+    <string name="menu_tipo">Social network</string>
+    <!--<string name="pub_id">ca-app-pub-8817634033676287~7981741263</string>
+    <string name="pub_me">ca-app-pub-8817634033676287/9748132979</string>-->
+    <string name="pub_id">ca-app-pub-8817634033676287~7981741263</string>
+    <string name="banner_ad_unit_id">ca-app-pub-8817634033676287/9748132979</string>
+    <string name="banner_ad_unit_id_intersticial">ca-app-pub-8817634033676287/2559277205</string>
+
+    <string name="n_mero">Number Phone</string>
+    <string name="texto">Text</string>
+    <string name="copiar_link">Copy</string>
+    <string name="compartilhar">Share</string>
+    <string name="numero_helper">Put your phone number</string>
+    <string name="texto_compartilhar">Text that you wanna to share</string>
+    <string name="abrir_contato">Open contact</string>
+    <string name="helper_numero">Put the phone number that you wanna to talk</string>
+    <string name="sim">Yes</string>
+    <string name="nao">No</string>
+
+</resources>

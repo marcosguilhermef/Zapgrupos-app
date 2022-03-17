@@ -39,6 +39,7 @@
     <string name="texto_compartilhar">O texto que você quer compartilhar</string>
     <string name="abrir_contato">Abrir contato</string>
     <string name="helper_numero">Coloque o número que você quer se comunicar</string>
-
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
 
 </resources>
