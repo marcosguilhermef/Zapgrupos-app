@@ -1,6 +1,7 @@
 package com.origin.zapgrupos.ui.ListaGruposPorCategoria;
 
 import android.content.Context;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,21 +54,28 @@ public class ListaDeGruposAdapter extends BaseAdapter {
             holder.imagem = (ImageView) convertView.findViewById(R.id.imageView_grupo);
             holder.titulo = (TextView) convertView.findViewById(R.id.text_view_titulo_grupo);
             holder.descricao = (TextView) convertView.findViewById(R.id.text_view_descricao_grupo);
-
+            holder.imageViewTipo = (ImageView) convertView.findViewById(R.id.imageView_tipo);
             convertView.setTag(holder);
         } else {
             holder = (viewHolder) convertView.getTag();
         }
 
+
         Grupo grupo = this.listData.get(position);
-        Log.i("teste", grupo.getTitulo());
+
         holder.titulo.setText(grupo.getTitulo() != null ? grupo.getTitulo() : "");
         holder.descricao.setText(grupo.getDescricao() != null ? grupo.getDescricao() : "");
+
+
+        if(grupo.getTipo().equals("whatsapp")){
+            holder.imageViewTipo.setImageResource(R.drawable.icons8_whatsapp_48);
+        }else if(grupo.getTipo().equals("telegram")){
+            holder.imageViewTipo.setImageResource(R.drawable.icons8_aplica__o_telegrama_48);
+        }
 
         try{
             holder.url = grupo.getImg().get(0);
             holder.id = grupo.get_id();
-            Log.i("imagem", String.valueOf(grupo.getSensivel()));
             if((grupo.getSensivel() == false) || (grupo.getSensivel() == null)) {
                 Glide.with(context)
                         .load(holder.url)
@@ -90,5 +98,6 @@ public class ListaDeGruposAdapter extends BaseAdapter {
         TextView titulo;
         TextView descricao;
         ImageView imagem;
+        ImageView imageViewTipo;
     }
 }

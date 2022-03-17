@@ -6,6 +6,8 @@ public class CategoriaDataModel{
     public String[] img;
     public String created_at;
     public String descricao;
+    public String tipo;
+
 
     public CategoriaDataModel(){
 
@@ -29,5 +31,13 @@ public class CategoriaDataModel{
     
     public String getDescricao(){
         return descricao;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

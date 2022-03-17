@@ -70,7 +70,7 @@ public class ListaDeCategorias  extends BaseAdapter {
             Glide.with(context)
                     .load(holder.url)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .placeholder(R.drawable.ic_baseline_error_outline_24)
                     .into(holder.categoriaView);
         }catch (Exception e){
             holder.categoriaView.setImageResource(R.drawable.ic_baseline_error_outline_24);
