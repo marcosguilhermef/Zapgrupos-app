@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,8 @@ public class GrupoFragment extends Fragment {
     private static final String ARG_PARAM4 = "descricao";
     private static final String ARG_PARAM5 = "categoria";
     private static final String ARG_PARAM6 = "_id";
+    private static final String ARG_PARAM7 = "sensivel";
+    private static final String ARG_PARAM8 = "tipo";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -42,6 +45,8 @@ public class GrupoFragment extends Fragment {
     private String mParam4;
     private String mParam5;
     private String mParam6;
+    private Boolean mParam7;
+    private String mParam8;
 
     public GrupoFragment() {
         // Required empty public constructor
@@ -75,6 +80,8 @@ public class GrupoFragment extends Fragment {
             mParam4 = getArguments().getString(ARG_PARAM4);
             mParam5 = getArguments().getString(ARG_PARAM5);
             mParam6 = getArguments().getString(ARG_PARAM6);
+            mParam7 = getArguments().getBoolean(ARG_PARAM7);
+            mParam8 = getArguments().getString(ARG_PARAM8);
         }
     }
 
@@ -84,15 +91,20 @@ public class GrupoFragment extends Fragment {
 
         binding.grupoTitulo.setText(mParam1 == null ? "" : mParam1);
         binding.grupoDescricao.setText(mParam4 == null ? "" : mParam4);
+        if(mParam7 == false || mParam7 == null){
+            Glide.with(getContext())
+                    .load(mParam3)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_baseline_error_outline_24)
+                    .into(binding.grupoImagem);
+        }{
+            binding.grupoImagem.setImageResource(R.drawable.ic_baseline_error_outline_24);
+        }
 
-        Glide.with(getContext())
-                .load(mParam3)
-                .centerCrop()
-                .placeholder(R.drawable.ic_baseline_error_outline_24)
-                .into(binding.grupoImagem);
         binding.EntrarButton.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                Log.i("url:", mParam2);
                 Intent viewIntent =
                         new Intent("android.intent.action.VIEW",
                                 Uri.parse( mParam2 ));
@@ -119,10 +131,6 @@ public class GrupoFragment extends Fragment {
         });
 
         View view = binding.getRoot();
-        //binding.grupoTitulo.setText(mParam1 == null ? "" : mParam1);
-        //binding.grupoTitulo.setText(mParam1 == null ? "" : mParam1);
-
-        // Inflate the layout for this fragment
         return view;
     }
 

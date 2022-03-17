@@ -5,9 +5,6 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
 
-    <action android:id="@+id/nav_add_group_button"
-        app:destination="@+id/nav_adicionar_grupo"/>
-
     <fragment
         android:id="@+id/nav_home"
         android:name="com.origin.zapgrupos.ui.home.HomeFragment"
@@ -23,7 +20,11 @@
         android:id="@+id/nav_adicionar_grupo"
         android:name="com.origin.zapgrupos.ui.AdicionarGrupo.AdicionarGrupoFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_adicionar_grupo" />
+        tools:layout="@layout/fragment_adicionar_grupo" >
+        <action
+            android:id="@+id/action_nav_adicionar_grupo_to_nav_grupo"
+            app:destination="@id/nav_grupo" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_slideshow"
@@ -74,6 +75,10 @@
             app:nullable="true"/>
         <argument
             android:name="_id"
+            app:argType="string"
+            app:nullable="true"/>
+        <argument
+            android:name="tipo"
             app:argType="string"
             app:nullable="true"/>
     </fragment>

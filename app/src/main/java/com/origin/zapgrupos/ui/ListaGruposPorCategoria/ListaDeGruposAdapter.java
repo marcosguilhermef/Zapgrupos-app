@@ -53,7 +53,7 @@ public class ListaDeGruposAdapter extends BaseAdapter {
             holder.imagem = (ImageView) convertView.findViewById(R.id.imageView_grupo);
             holder.titulo = (TextView) convertView.findViewById(R.id.text_view_titulo_grupo);
             holder.descricao = (TextView) convertView.findViewById(R.id.text_view_descricao_grupo);
-
+            holder.imageTipo = (ImageView) convertView.findViewById(R.id.imageView_tipo);
             convertView.setTag(holder);
         } else {
             holder = (viewHolder) convertView.getTag();
@@ -64,10 +64,14 @@ public class ListaDeGruposAdapter extends BaseAdapter {
         holder.titulo.setText(grupo.getTitulo() != null ? grupo.getTitulo() : "");
         holder.descricao.setText(grupo.getDescricao() != null ? grupo.getDescricao() : "");
 
+        if(grupo.getTipo().equals("whatsapp")){
+            holder.imageTipo.setImageResource(R.drawable.icons8_whatsapp_48);
+        }else if(grupo.getTipo().equals("telegram")){
+            holder.imageTipo.setImageResource(R.drawable.icons8_aplica__o_telegrama_48);
+        }
         try{
             holder.url = grupo.getImg().get(0);
             holder.id = grupo.get_id();
-            Log.i("imagem", String.valueOf(grupo.getSensivel()));
             if((grupo.getSensivel() == false) || (grupo.getSensivel() == null)) {
                 Glide.with(context)
                         .load(holder.url)
@@ -90,5 +94,6 @@ public class ListaDeGruposAdapter extends BaseAdapter {
         TextView titulo;
         TextView descricao;
         ImageView imagem;
+        ImageView imageTipo;
     }
 }

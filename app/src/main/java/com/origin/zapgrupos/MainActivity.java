@@ -2,17 +2,11 @@ package com.origin.zapgrupos;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -52,14 +46,6 @@ public class MainActivity extends AppCompatActivity implements onChangeTitle {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarMain.toolbar);
-        /*binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController navController = Navigation.findNavController(getCurrentActivity(), R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.nav_add_group_button);
-            }
-        });*/
-
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
@@ -71,12 +57,6 @@ public class MainActivity extends AppCompatActivity implements onChangeTitle {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-/*        AdView adView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);*/
-
-        //adView.setAdUnitId(getString(R.string.banner_ad_unit_id));
     }
 
     public Activity getCurrentActivity(){

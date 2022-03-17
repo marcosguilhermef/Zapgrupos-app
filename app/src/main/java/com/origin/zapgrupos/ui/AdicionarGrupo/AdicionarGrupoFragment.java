@@ -6,11 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
@@ -20,32 +20,30 @@ import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentAdicionarGrupoBinding;
 import com.origin.zapgrupos.models.AdiconarGrupo.ErrosResponse;
 import com.origin.zapgrupos.models.AdiconarGrupo.SucessoResponse;
-
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
 import com.origin.zapgrupos.models.AdiconarGrupo.Repository.Requests;
+import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Grupo;
 import com.origin.zapgrupos.ui.home.HomeViewModel;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-
 public class AdicionarGrupoFragment extends Fragment {
 
     final private String url = "https://zapgrupos.xyz/api/add-grupo";
     private AdicionarGrupoViewModel adicionarGrupoViewModel;
     private FragmentAdicionarGrupoBinding binding;
     private InterstitialAd mInterstitialAd;
-
+    private Bundle bundle;
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 
+        if(bundle == null){
+            bundle = new Bundle();
+        }
         adicionarGrupoViewModel = new ViewModelProvider(this).get(AdicionarGrupoViewModel.class);
 
         binding = FragmentAdicionarGrupoBinding.inflate(inflater, container, false);
@@ -56,7 +54,7 @@ public class AdicionarGrupoFragment extends Fragment {
         adicionarGrupoViewModel.getSucesso().observe(getViewLifecycleOwner(), new Observer<SucessoResponse>(){
             @Override
             public void onChanged(SucessoResponse sucessoResponse) {
-                mensagemDeSucesso();
+                mensagemDeSucesso(sucessoResponse);
             }
         } );
 
@@ -98,7 +96,6 @@ public class AdicionarGrupoFragment extends Fragment {
         binding.MenuPaisContent.setAdapter(pais);
         binding.MenuCategoriaInputView.setAdapter(categorias);
         binding.MenuTipoInputView.setAdapter(tipo);
-
         return root;
     }
 
@@ -206,9 +203,22 @@ public class AdicionarGrupoFragment extends Fragment {
                 .setMessage("Algum erro foi detectado: "+erro)
                 .show();
     }
-    private void mensagemDeSucesso(){
+    private void mensagemDeSucesso(SucessoResponse sucessoResponse){
         new MaterialAlertDialogBuilder(getContext(),R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
                 .setMessage(R.string.mensagem_sucesso)
+                .setPositiveButton(R.string.sim, (v,i) ->{
+                    bundle.putString("_id",sucessoResponse.getId());
+                    bundle.putString("url",sucessoResponse.getUrl());
+                    bundle.putString("img",null);
+                    bundle.putString("categoria",sucessoResponse.getCategoria());
+                    bundle.putString("descricao",sucessoResponse.getDescricao());
+                    bundle.putBoolean("sensivel",true);
+                    bundle.putString("tipo",sucessoResponse.getTipo());
+                    Navigation.findNavController(this.getView()).navigate(R.id.nav_grupo, bundle);
+                })
+                .setNegativeButton(R.string.nao, (v,i) -> {
+                    v.cancel();
+                })
                 .show();
     }
 

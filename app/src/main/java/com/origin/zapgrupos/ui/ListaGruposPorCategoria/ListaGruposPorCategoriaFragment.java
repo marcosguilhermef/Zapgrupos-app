@@ -74,7 +74,6 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
             }
         });
         binding.listViewGrupos.setOnItemClickListener(onClickItemCategory());
-
         return root;
     }
 
@@ -109,7 +108,6 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
         return new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Log.i("clicou", "Clicou e funcionou");
                 Object o = binding.listViewGrupos.getItemAtPosition(position);
                 Grupo group = (Grupo) o;
                 bundle.putString("_id",group.get_id());
@@ -118,6 +116,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
                 bundle.putString("img",group.getImg().get(0));
                 bundle.putString("categoria",group.getCategoria());
                 bundle.putString("descricao",group.getDescricao());
+                bundle.putBoolean("sensivel",group.getSensivel());
                 Navigation.findNavController(v).navigate(R.id.nav_grupo, bundle);
             }
         };
@@ -166,9 +165,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
 
                             @Override
                             public void onAdShowedFullScreenContent() {
-
                                 mInterstitialAd = null;
-                                Log.d("Ads TAG", "The ad was shown.");
                             }
                         });
                         mInterstitialAd.show(getActivity());
@@ -194,8 +191,4 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
 
     }
 
-
-    /*public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(String title);
-    }*/
 }
