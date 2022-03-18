@@ -22,7 +22,6 @@ public class ListaDeGruposAdapter extends BaseAdapter {
     private Context context;
     private viewHolder holder;
 
-
     public ListaDeGruposAdapter(Context aContext,  List<Grupo> listData) {
         this.context = aContext;
         this.listData = listData;
@@ -60,7 +59,6 @@ public class ListaDeGruposAdapter extends BaseAdapter {
         }
 
         Grupo grupo = this.listData.get(position);
-        Log.i("teste", grupo.getTitulo());
         holder.titulo.setText(grupo.getTitulo() != null ? grupo.getTitulo() : "");
         holder.descricao.setText(grupo.getDescricao() != null ? grupo.getDescricao() : "");
 
@@ -69,6 +67,7 @@ public class ListaDeGruposAdapter extends BaseAdapter {
         }else if(grupo.getTipo().equals("telegram")){
             holder.imageTipo.setImageResource(R.drawable.icons8_aplica__o_telegrama_48);
         }
+
         try{
             holder.url = grupo.getImg().get(0);
             holder.id = grupo.get_id();

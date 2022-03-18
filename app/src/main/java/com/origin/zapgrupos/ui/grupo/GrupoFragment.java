@@ -91,7 +91,7 @@ public class GrupoFragment extends Fragment {
 
         binding.grupoTitulo.setText(mParam1 == null ? "" : mParam1);
         binding.grupoDescricao.setText(mParam4 == null ? "" : mParam4);
-        if(mParam7 == false || mParam7 == null){
+        if(mParam7 == false || mParam7 == null || mParam3 == null){
             Glide.with(getContext())
                     .load(mParam3)
                     .centerCrop()

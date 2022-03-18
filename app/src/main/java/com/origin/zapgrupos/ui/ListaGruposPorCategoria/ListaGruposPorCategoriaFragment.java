@@ -2,6 +2,7 @@ package com.origin.zapgrupos.ui.ListaGruposPorCategoria;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,13 +41,12 @@ import java.net.URL;
 public class ListaGruposPorCategoriaFragment extends Fragment implements onChangeTitle {
 
     private FragmentListaGruposPorCategoriaBinding binding;
-    //final private String url = "https://zapgrupos.xyz/api/grupos/Amizade?page=1&limit=20";
     private onChangeTitle mListener;
     private ListaDeGruposPorCategoriaViewModel viewModel;
     private Requests Request;
     private Bundle bundle;
     private InterstitialAd mInterstitialAd;
-
+    private Parcelable state;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(savedInstanceState == null){
@@ -121,13 +121,26 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
             }
         };
     }
+    @Override
+    public void onPause() {
+        super.onPause();
+        state = binding.listViewGrupos.onSaveInstanceState();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(state != null){
+            binding.listViewGrupos.onRestoreInstanceState(state);
+        }
+    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        viewModel.setCategoria(null);
-        viewModel.setDownloaded(false);
+        //viewModel.setCategoria(null);
+        //viewModel.setDownloaded(false);
 
     }
 
