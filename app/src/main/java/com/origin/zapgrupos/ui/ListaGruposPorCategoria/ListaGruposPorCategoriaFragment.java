@@ -101,7 +101,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     private void MontarListaDeGrupos(ListaDeGrupos grupos){
         ListView listView = binding.listViewGrupos;
         viewModel.setDownloaded(true);
-        listView.setAdapter(new com.origin.zapgrupos.ui.ListaGruposPorCategoria.ListaDeGruposAdapter(getActivity(), grupos.getData()));
+        listView.setAdapter(new ListaDeGruposAdapter(getActivity(), grupos.getData()));
     }
 
     private AdapterView.OnItemClickListener onClickItemCategory(){

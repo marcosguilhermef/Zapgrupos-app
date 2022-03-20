@@ -118,6 +118,7 @@ public class GrupoFragment extends Fragment {
             public void onClick(View view) {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
+                mParam5 =mParam5.replace(" ","-");
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "" +
                         "Olá, eu obti esse grupo através do zapgrupos. " +
                         "Aplicativo que está disponéveil na playstore! " +

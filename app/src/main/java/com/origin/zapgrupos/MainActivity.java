@@ -11,13 +11,10 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.onesignal.OneSignal;
 import com.origin.zapgrupos.databinding.ActivityMainBinding;
 import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
 
@@ -25,16 +22,11 @@ public class MainActivity extends AppCompatActivity implements onChangeTitle {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    private static final String ONESIGNAL_APP_ID = "3d578a0d-5ed2-4e6e-bea1-f899d8d8d29c";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
-        OneSignal.initWithContext(this);
-        OneSignal.setAppId(ONESIGNAL_APP_ID);
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override

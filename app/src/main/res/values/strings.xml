@@ -25,12 +25,9 @@
     <string name="mensagem_sucesso">O seu grupo foi adicionado com sucesso!</string>
     <string name="menu_categoria">Categoria</string>
     <string name="menu_tipo">Tipo</string>
-    <!--<string name="pub_id">ca-app-pub-8817634033676287~7981741263</string>
-    <string name="pub_me">ca-app-pub-8817634033676287/9748132979</string>-->
     <string name="pub_id">ca-app-pub-8817634033676287~7981741263</string>
     <string name="banner_ad_unit_id">ca-app-pub-8817634033676287/9748132979</string>
     <string name="banner_ad_unit_id_intersticial">ca-app-pub-8817634033676287/2559277205</string>
-
     <string name="n_mero">Número</string>
     <string name="texto">Texto</string>
     <string name="copiar_link">Copiar link</string>
@@ -41,5 +38,6 @@
     <string name="helper_numero">Coloque o número que você quer se comunicar</string>
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
+    <string name="msg_token_fmt">\"TOKEN DO FIREBASE\"</string>
 
 </resources>
