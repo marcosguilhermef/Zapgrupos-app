@@ -10,8 +10,8 @@ android {
         applicationId "com.origin.zapgrupos"
         minSdk 24
         targetSdk 31
-        versionCode 14
-        versionName "1.0.3-p"
+        versionCode 15
+        versionName "1.0.31"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

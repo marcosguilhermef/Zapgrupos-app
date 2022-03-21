@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
@@ -7,18 +8,22 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_group"
-            android:title="@string/menu_home" />
+            android:title="@string/menu_home"
+            />
         <item
             android:id="@+id/nav_gerar_mensagem_sem_contato"
             android:icon="@drawable/ic_baseline_chat_bubble_24"
-            android:title="@string/title_mensagem_sem_contato" />
+            android:title="@string/title_mensagem_sem_contato"
+            />
         <item
             android:id="@+id/nav_gerar_link"
             android:icon="@drawable/ic_baseline_link_24"
-            android:title="@string/title_gerar_link" />
+            android:title="@string/title_gerar_link"
+            />
         <item
             android:id="@+id/nav_adicionar_grupo"
             android:icon="@drawable/ic_menu_add"
-            android:title="@string/menu_adicionar_grupo" />
+            android:title="@string/menu_adicionar_grupo"
+            />
     </group>
 </menu>

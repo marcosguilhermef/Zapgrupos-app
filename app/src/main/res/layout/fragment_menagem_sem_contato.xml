@@ -35,6 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textCursorDrawable="@drawable/cursor_color"
+                    android:inputType="number"
                     android:hint="@string/n_mero" />
             </com.google.android.material.textfield.TextInputLayout>
 

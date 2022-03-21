@@ -24,7 +24,8 @@
                 android:layout_marginEnd="8dp"
                 android:hint="@string/imput_link"
                 app:boxStrokeColor="@color/mtlr_filled_strock_color"
-                app:hintTextColor="@color/mtlr_filled_strock_color"                app:layout_constraintEnd_toEndOf="parent"
+                app:hintTextColor="@color/mtlr_filled_strock_color"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -77,6 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textCursorDrawable="@drawable/cursor_color"
+                    android:inputType="number"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
