@@ -138,10 +138,14 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
         binding = null;
-        //viewModel.setCategoria(null);
-        //viewModel.setDownloaded(false);
-
+        viewModel.setCategoria(null);
+        viewModel.setDownloaded(false);
+        state = null;
     }
 
     @Override
