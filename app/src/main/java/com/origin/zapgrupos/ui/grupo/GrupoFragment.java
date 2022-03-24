@@ -121,8 +121,8 @@ public class GrupoFragment extends Fragment {
                 mParam5 =mParam5.replace(" ","-");
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "" +
                         "Olá, eu obti esse grupo através do zapgrupos. " +
-                        "Aplicativo que está disponéveil na playstore! " +
-                        "Entre no link abaixo e acesse esse grupo de whatsapp que eu achei legal: " +
+                        "Aplicativo que está disponível na playstore! " +
+                        "Entre no link abaixo para acessar esse grupo de whatsapp que eu achei legal: " +
                         "https://zapgrupos.xyz/"+mParam5+"/"+mParam6 );
                 sendIntent.setType("text/plain");
                 Intent shareIntent = Intent.createChooser(sendIntent, null);

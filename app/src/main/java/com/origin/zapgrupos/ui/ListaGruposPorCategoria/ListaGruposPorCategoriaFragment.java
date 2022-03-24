@@ -113,7 +113,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
                 bundle.putString("_id",group.get_id());
                 bundle.putString("titulo",group.getTitulo());
                 bundle.putString("url",group.getUrl());
-                bundle.putString("img",group.getImg().get(0));
+                bundle.putString("img",group.getImg() != null ? group.getImg().get(0) : null);
                 bundle.putString("categoria",group.getCategoria());
                 bundle.putString("descricao",group.getDescricao());
                 bundle.putBoolean("sensivel",group.getSensivel());

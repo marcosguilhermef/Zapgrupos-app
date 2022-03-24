@@ -45,10 +45,8 @@ public class ListaDeGruposAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
         if (convertView == null) {
-
             convertView = layoutInflater.inflate(R.layout.list_item_grupo, null);
             holder = new viewHolder();
-
             holder.imagem = (ImageView) convertView.findViewById(R.id.imageView_grupo);
             holder.titulo = (TextView) convertView.findViewById(R.id.text_view_titulo_grupo);
             holder.descricao = (TextView) convertView.findViewById(R.id.text_view_descricao_grupo);
@@ -64,25 +62,20 @@ public class ListaDeGruposAdapter extends BaseAdapter {
 
         if(grupo.getTipo().equals("whatsapp")){
             holder.imageTipo.setImageResource(R.drawable.icons8_whatsapp_48);
-        }else if(grupo.getTipo().equals("telegram")){
+        }
+
+        if(grupo.getTipo().equals("telegram") || grupo.getTipo().equals("t.me")){
             holder.imageTipo.setImageResource(R.drawable.icons8_aplica__o_telegrama_48);
         }
 
-        try{
-            holder.url = grupo.getImg().get(0);
+
+            holder.url = grupo.getImg() != null ? grupo.getImg().get(0) : null;
             holder.id = grupo.get_id();
-            if((grupo.getSensivel() == false) || (grupo.getSensivel() == null)) {
-                Glide.with(context)
-                        .load(holder.url)
-                        .centerCrop()
-                        .placeholder(R.drawable.ic_baseline_error_outline_24)
-                        .into(holder.imagem);
-            }else{
-                holder.imagem.setImageResource(R.drawable.ic_baseline_error_outline_24);
+            Boolean exibir = (grupo.getSensivel() == false) || (grupo.getSensivel() == null);
+
+            if(exibir) {
+                Glide.with(context).load(holder.url).centerCrop().placeholder(R.drawable.ic_baseline_error_outline_24).into(holder.imagem);
             }
-        }catch (Exception e){
-            holder.imagem.setImageResource(R.drawable.ic_baseline_error_outline_24);
-        }
 
         return convertView;
     }

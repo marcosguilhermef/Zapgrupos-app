@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Zapgrupos</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Zapgrupos</string>
+    <string name="nav_header_subtitle"></string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="adicionar_grupo">Recurso ainda não está disponível</string>
+    <string name="menu_home">Lista de grupos</string>
+    <string name="menu_gallery">Adicionar grupo</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title_nav">Lista de grupos</string>
+    <string name="title_gerar_link">Gerar link de mensagem</string>
+    <string name="title_mensagem_sem_contato">Mensagem sem contato</string>
+
+    <string name="menu_adicionar_grupo">Adicionar Grupos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="imput_link">Link</string>
+    <string name="imput_descricao">Descrição</string>
+    <string name="imput_telefone">Telefone</string>
+    <string name="imput_email">E-mail</string>
+    <string name="menu_pais">País</string>
+    <string name="mensagem_sucesso">O seu grupo foi adicionado com sucesso!</string>
+    <string name="menu_categoria">Categoria</string>
+    <string name="menu_tipo">Tipo</string>
+    <string name="pub_id">ca-app-pub-8817634033676287~7981741263</string>
+    <string name="banner_ad_unit_id">ca-app-pub-8817634033676287/9748132979</string>
+    <string name="banner_ad_unit_id_intersticial">ca-app-pub-8817634033676287/2559277205</string>
+    <string name="n_mero">Número</string>
+    <string name="texto">Texto</string>
+    <string name="copiar_link">Copiar link</string>
+    <string name="compartilhar">compartilhar</string>
+    <string name="numero_helper">Coloque o número do seu telefone</string>
+    <string name="texto_compartilhar">O texto que você quer compartilhar</string>
+    <string name="abrir_contato">Abrir contato</string>
+    <string name="helper_numero">Coloque o número que você quer se comunicar</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="msg_token_fmt">\"TOKEN DO FIREBASE\"</string>
+
+</resources>

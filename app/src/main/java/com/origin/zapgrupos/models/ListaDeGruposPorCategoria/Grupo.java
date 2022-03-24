@@ -19,7 +19,7 @@ public class Grupo {
     public String descricao;
     public String tipo;
     public String categoria;
-    public Integer vizita;
+    public Long vizita;
     public Boolean sensivel;
     public List<String> img;
     public String created_at;
@@ -73,11 +73,11 @@ public class Grupo {
         this.categoria = categoria;
     }
 
-    public Integer getVizita() {
+    public Long getVizita() {
         return vizita;
     }
 
-    public void setVizita(Integer vizita) {
+    public void setVizita(Long vizita) {
         this.vizita = vizita;
     }
 
