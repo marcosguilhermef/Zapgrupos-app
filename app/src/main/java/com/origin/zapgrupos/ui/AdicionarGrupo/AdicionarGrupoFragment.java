@@ -34,7 +34,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 public class AdicionarGrupoFragment extends Fragment {
 
-    final private String url = "https://c385-170-82-181-108.ngrok.io/api/add-grupo";
+    final private String url = "https://zapgrupos.xyz/api/add-grupo";
     private AdicionarGrupoViewModel adicionarGrupoViewModel;
     private FragmentAdicionarGrupoBinding binding;
     private InterstitialAd mInterstitialAd;

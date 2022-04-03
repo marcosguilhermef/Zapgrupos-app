@@ -84,7 +84,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     private MutableLiveData<ListaDeGrupos> getGruposModelLiveData(){
         if(viewModel.getGrupos() == null){
             try{
-                final String url = "https://c385-170-82-181-108.ngrok.io/api/grupos/"
+                final String url = "https://zapgrupos.xyz/api/grupos/"
                         +getArguments().getString("categoria")
                         +"?page=1"
                         +"&limit=500";

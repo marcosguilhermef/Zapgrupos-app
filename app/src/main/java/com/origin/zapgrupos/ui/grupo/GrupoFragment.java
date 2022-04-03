@@ -123,7 +123,7 @@ public class GrupoFragment extends Fragment {
                         "Olá, eu obti esse grupo através do zapgrupos. " +
                         "Aplicativo que está disponível na playstore! " +
                         "Entre no link abaixo para acessar esse grupo de whatsapp que eu achei legal: " +
-                        "https://c385-170-82-181-108.ngrok.io/"+mParam5+"/"+mParam6 );
+                        "https://zapgrupos.xyz/"+mParam5+"/"+mParam6 );
                 sendIntent.setType("text/plain");
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);

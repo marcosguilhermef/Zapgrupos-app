@@ -17,34 +17,26 @@ public class CategoriaModel{
     public Integer total;
     public List<CategoriaDataModel> data;
     public CategoriaModel(){
-
     }
     public Integer getCurrentPage(){
         return current_page;
     }
-
     public URL getFirstPageUrl(){
         return first_page_url;
     }
-
     public URL getLastPageUrl(){
         return last_page_url;
     }
-
     public URL getNextPageUrl(){ return next_page_url; }
-
     public URL getPrevPageUrl(){
         return prev_page_url;
     }
-
     public URL getPath(){
         return path;
     }
-
     public List<CategoriaDataModel> getData(){
         return data;
     }
-
     public String getName(){
         return "CategoriaModel";
     }

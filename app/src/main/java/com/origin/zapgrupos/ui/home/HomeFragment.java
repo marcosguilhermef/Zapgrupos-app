@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
     private ListView listView;
-    final private String url = "https://c385-170-82-181-108.ngrok.io/api/mais";
+    final private String url = "https://zapgrupos.xyz/api/mais";
     private Requests Request;
     private Bundle bundle;
 
