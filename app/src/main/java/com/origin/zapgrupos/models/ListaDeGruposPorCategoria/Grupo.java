@@ -1,18 +1,9 @@
 package com.origin.zapgrupos.models.ListaDeGruposPorCategoria;
 
-import androidx.room.Entity;
-import androidx.room.Index;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.PrimaryKey;
-import androidx.room.Query;
 
 import java.util.List;
 
-@Entity()
-
 public class Grupo {
-    @PrimaryKey
     public String _id;
     public String url;
     public String titulo;
