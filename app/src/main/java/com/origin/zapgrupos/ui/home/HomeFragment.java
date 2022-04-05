@@ -7,23 +7,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
 import com.origin.zapgrupos.models.Categorias.CategoriaDataModel;
 import com.origin.zapgrupos.models.Categorias.CategoriaModel;
-import com.origin.zapgrupos.models.Categorias.Repository.Requests;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentHomeBinding;
+import com.origin.zapgrupos.models.Error.ErrorMensage;
+import com.origin.zapgrupos.repository.Services;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import android.widget.Toast;
 
@@ -32,8 +28,6 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
     private ListView listView;
-    final private String url = "https://zapgrupos.xyz/api/mais";
-    private Requests Request;
     private Bundle bundle;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,47 +46,43 @@ public class HomeFragment extends Fragment {
         listView = binding.listView;
         final ProgressBar progressBar = binding.progressBar;
 
-        homeViewModel.getDownloaded().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean b) {
-                progressBar.setVisibility( !b ? progressBar.VISIBLE : progressBar.GONE);
-            }
-        });
 
         homeViewModel.getCategoria().observe(getViewLifecycleOwner(), new Observer<CategoriaModel>() {
             @Override
             public void onChanged(@Nullable CategoriaModel categoriaModel) {
-                MontarListaDeCategorias(categoriaModel);
+                if(categoriaModel != null){
+                    MontarListaDeCategorias(categoriaModel);
+                    progressBar.setVisibility(progressBar.GONE);
+                    binding.constraintError.setVisibility(binding.constraintError.INVISIBLE);
+                }
             }
         }
         );
 
+        homeViewModel.getErro().observe(getViewLifecycleOwner(), new Observer<ErrorMensage>() {
+            @Override
+            public void onChanged(ErrorMensage errorMensage) {
+                if(errorMensage != null){
+                    listView.setVisibility(listView.INVISIBLE);
+                    progressBar.setVisibility(progressBar.GONE);
+                    binding.constraintError.setVisibility(binding.constraintError.VISIBLE);
+                    binding.textView2.setText(R.string.net_work_error);
+                }
+            }
+        });
         listView.setOnItemClickListener(this.onClickItemCategory());
 
         return root;
     }
 
     private void makeRequest(){
-        homeViewModel.setCategoria(getCategoriaModelLiveData());
+        Services request = new Services();
+        request.getCategories(homeViewModel.getCategoria(), homeViewModel.getErro());
     }
 
-    private MutableLiveData<CategoriaModel> getCategoriaModelLiveData(){
-        if(homeViewModel.getCategoria() == null){
-            try{
-                URL url = new URL(this.url);
-                Request = new Requests(url,getActivity().getApplicationContext(), CategoriaModel.class);
-                return Request.rum().getResponseLiveData();
-            }catch (MalformedURLException e) {
-                return null;
-            }
-        }
-        return homeViewModel.getCategoria();
-    }
 
     private void MontarListaDeCategorias(CategoriaModel categoriaModel){
         listView = binding.listView;
-        homeViewModel.setDownloaded(true);
-        //ArrayAdapter<CategoriaDataModel> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,categoriaModel.getData());
         listView.setAdapter(new ListaDeCategorias(getActivity(),categoriaModel.getData()));
     }
 

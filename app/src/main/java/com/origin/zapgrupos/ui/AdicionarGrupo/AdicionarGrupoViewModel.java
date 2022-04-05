@@ -1,25 +1,23 @@
 package com.origin.zapgrupos.ui.AdicionarGrupo;
 
-import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.origin.zapgrupos.models.AdiconarGrupo.ErrosResponse;
-import com.origin.zapgrupos.models.AdiconarGrupo.Repository.ResponseErrorListener;
-import com.origin.zapgrupos.models.AdiconarGrupo.Repository.ResponseListener;
 import com.origin.zapgrupos.models.AdiconarGrupo.SucessoResponse;
-import com.origin.zapgrupos.models.Categorias.CategoriaModel;
+import com.origin.zapgrupos.models.Error.ErrorMensage;
 
 public class AdicionarGrupoViewModel extends ViewModel {
 
-    private static MutableLiveData<SucessoResponse> sucesso;
-    private static MutableLiveData<ErrosResponse> erro;
+    public MutableLiveData<SucessoResponse> sucesso;
+    public MutableLiveData<ErrosResponse> erro;
+    public MutableLiveData<ErrorMensage> errorNetwork;
 
     public AdicionarGrupoViewModel() {
-        sucesso = ResponseListener.factoryLiveData();
-        erro = ResponseErrorListener.factoryLiveData();
+        sucesso = new MutableLiveData<>(null);
+        erro = new MutableLiveData<>(null);
+        errorNetwork = new MutableLiveData<>(null);
     }
 
     public void setSucesso(SucessoResponse sucesso) { this.sucesso.setValue(sucesso); }
@@ -29,8 +27,6 @@ public class AdicionarGrupoViewModel extends ViewModel {
     public MutableLiveData<SucessoResponse> getSucesso(){
         return sucesso;
     }
-
-    /*----------------------------------------------------------------*/
 
     public void setErro(ErrosResponse erro) {
         this.erro.setValue(erro);

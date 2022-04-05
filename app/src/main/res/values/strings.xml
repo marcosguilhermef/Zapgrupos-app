@@ -20,7 +20,7 @@
     <string name="imput_telefone">Number Phone</string>
     <string name="imput_email">Email</string>
     <string name="menu_pais">Country</string>
-    <string name="mensagem_sucesso">Your group has been successfully added!</string>
+    <string name="mensagem_sucesso">Your group has been successfully added! Do you wanna to see it?</string>
     <string name="menu_categoria">Category</string>
     <string name="menu_tipo">Social network</string>
     <string name="pub_id">ca-app-pub-8817634033676287~7981741263</string>
@@ -37,5 +37,6 @@
     <string name="sim">Yes</string>
     <string name="nao">No</string>
     <string name="msg_token_fmt">\"TOKEN DO FIREBASE\"</string>
+    <string name="net_work_error">Network fail. Verify your Internet and Retry again.</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.origin.zapgrupos.ui.ListaGruposPorCategoria;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -9,16 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
@@ -26,16 +23,12 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.origin.zapgrupos.R;
-import com.origin.zapgrupos.models.Categorias.CategoriaDataModel;
 import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Grupo;
 import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.ListaDeGrupos;
-import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Repository.Requests;
 import com.origin.zapgrupos.databinding.FragmentListaGruposPorCategoriaBinding;
-
+import com.origin.zapgrupos.repository.Services;
 import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 
 
 public class ListaGruposPorCategoriaFragment extends Fragment implements onChangeTitle {
@@ -43,7 +36,6 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     private FragmentListaGruposPorCategoriaBinding binding;
     private onChangeTitle mListener;
     private ListaDeGruposPorCategoriaViewModel viewModel;
-    private Requests Request;
     private Bundle bundle;
     private InterstitialAd mInterstitialAd;
     private Parcelable state;
@@ -58,19 +50,23 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
         mListener.onFragmentInteraction(getArguments().getString("categoria"));
         binding = FragmentListaGruposPorCategoriaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        makeRequest();
 
         viewModel.getDownloaded().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
-            public void onChanged(@Nullable Boolean b) {
-                binding.progressBarGrupos.setVisibility( !b ? binding.progressBarGrupos.VISIBLE : binding.progressBarGrupos.GONE);
+            public void onChanged(Boolean aBoolean) {
+                if(!aBoolean){
+                    makeRequest();
+                    viewModel.setDownloaded(true);
+                }
             }
         });
-
         viewModel.getGrupos().observe(getViewLifecycleOwner(), new Observer<ListaDeGrupos>() {
             @Override
             public void onChanged(@Nullable ListaDeGrupos grupos) {
-                MontarListaDeGrupos(grupos);
+                if(grupos != null){
+                    MontarListaDeGrupos(grupos);
+                    binding.progressBarGrupos.setVisibility(binding.progressBarGrupos.GONE);
+                }
             }
         });
         binding.listViewGrupos.setOnItemClickListener(onClickItemCategory());
@@ -78,29 +74,16 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     }
 
     private void makeRequest(){
-        viewModel.setCategoria(getGruposModelLiveData());
-    }
-
-    private MutableLiveData<ListaDeGrupos> getGruposModelLiveData(){
-        if(viewModel.getGrupos() == null){
-            try{
-                final String url = "https://zapgrupos.xyz/api/grupos/"
-                        +getArguments().getString("categoria")
-                        +"?page=1"
-                        +"&limit=500";
-                URL urlFormated = new URL(url);
-                Request = new Requests(urlFormated,getActivity().getApplicationContext());
-                return Request.rum().getResponseLiveData();
-            }catch (MalformedURLException e) {
-                return null;
-            }
-        }
-        return viewModel.getGrupos();
+        Services request = new Services();
+        request.getGroupsForCategory(
+                getArguments().getString("categoria"),
+                viewModel.getGrupos(),
+                viewModel.getErro()
+        );
     }
 
     private void MontarListaDeGrupos(ListaDeGrupos grupos){
         ListView listView = binding.listViewGrupos;
-        viewModel.setDownloaded(true);
         listView.setAdapter(new ListaDeGruposAdapter(getActivity(), grupos.getData()));
     }
 
@@ -196,6 +179,11 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
                     }
                 });
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
     @Override
     public void onDetach() {

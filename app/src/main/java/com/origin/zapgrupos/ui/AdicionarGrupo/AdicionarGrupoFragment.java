@@ -20,16 +20,16 @@ import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentAdicionarGrupoBinding;
 import com.origin.zapgrupos.models.AdiconarGrupo.ErrosResponse;
 import com.origin.zapgrupos.models.AdiconarGrupo.SucessoResponse;
-import java.net.URL;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.origin.zapgrupos.models.AdiconarGrupo.Repository.Requests;
 import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Grupo;
+import com.origin.zapgrupos.repository.Services;
 import com.origin.zapgrupos.ui.home.HomeViewModel;
 import org.json.JSONException;
-import org.json.JSONObject;
+
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 public class AdicionarGrupoFragment extends Fragment {
@@ -54,14 +54,19 @@ public class AdicionarGrupoFragment extends Fragment {
         adicionarGrupoViewModel.getSucesso().observe(getViewLifecycleOwner(), new Observer<SucessoResponse>(){
             @Override
             public void onChanged(SucessoResponse sucessoResponse) {
-                mensagemDeSucesso(sucessoResponse);
+                if(sucessoResponse != null){
+                    mensagemDeSucesso(sucessoResponse);
+
+                }
             }
         } );
 
         adicionarGrupoViewModel.getErro().observe(getViewLifecycleOwner(), new Observer<ErrosResponse>(){
             @Override
             public void onChanged(ErrosResponse errosResponse) {
-                showErro(errosResponse);
+                if(errosResponse != null){
+                    showErro(errosResponse);
+                }
             }
         } );
 
@@ -101,22 +106,42 @@ public class AdicionarGrupoFragment extends Fragment {
 
     private void sendGroup(){
         try{
-            Requests Re = new Requests(new URL(url), getContext(), getData()).rum();
+            Services s = new Services();
+            s.addNewGroup(
+                    getData(),
+                    adicionarGrupoViewModel.getSucesso(),
+                    adicionarGrupoViewModel.getErro(),
+                    adicionarGrupoViewModel.errorNetwork
+            );
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    private JSONObject getData() throws JSONException {
-        JSONObject json = new JSONObject();
-            json.put("link", binding.TextLinkInput.getText());
-            json.put("descricao", binding.TextDescricaoImput.getText());
-            json.put("email", binding.TextEmailImput.getText());
-            json.put("telefone", binding.TextTelefoneImput.getText());
-            json.put("categoria", binding.MenuCategoriaInputView.getText());
-            json.put("tipo", binding.MenuTipoInputView.getText());
-            json.put("pais", binding.MenuPaisContent.getText());
-        return json;
+    private Grupo getData() throws JSONException {
+        Grupo g = new Grupo();
+        if(binding.TextLinkInput.getText() != null) {
+            g.setLink(binding.TextLinkInput.getText().toString());
+        }
+        if(binding.TextDescricaoImput.getText() != null) {
+            g.setDescricao(binding.TextDescricaoImput.getText().toString());
+        }
+        if(binding.TextEmailImput.getText() != null) {
+            g.setEmail(binding.TextEmailImput.getText().toString());
+        }
+        if(binding.TextTelefoneImput.getText() != null) {
+            g.setTelefone(binding.TextTelefoneImput.getText().toString());
+        }
+        if(binding.MenuCategoriaInputView.getText() != null) {
+            g.setCategoria(binding.MenuCategoriaInputView.getText().toString());
+        }
+        if(binding.MenuTipoInputView.getText() != null) {
+            g.setTipo(binding.MenuTipoInputView.getText().toString());
+        }
+        if(binding.MenuPaisContent.getText() != null) {
+            g.setPais(binding.MenuPaisContent.getText().toString());
+        }
+        return g;
     }
 
     private void showErro(ErrosResponse errosResponse)  {
@@ -198,11 +223,7 @@ public class AdicionarGrupoFragment extends Fragment {
             binding.TextEmail.setErrorEnabled(false);
         }
     }
-    private void mensagemDeErro(String erro){
-        new MaterialAlertDialogBuilder(getContext(),R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
-                .setMessage("Algum erro foi detectado: "+erro)
-                .show();
-    }
+
     private void mensagemDeSucesso(SucessoResponse sucessoResponse){
         new MaterialAlertDialogBuilder(getContext(),R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
                 .setMessage(R.string.mensagem_sucesso)
@@ -265,6 +286,11 @@ public class AdicionarGrupoFragment extends Fragment {
 
     }
 
+    @Override
+    public void onPause(){
+        super.onPause();
+        adicionarGrupoViewModel.setErro(null);
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

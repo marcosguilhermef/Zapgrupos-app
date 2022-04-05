@@ -22,7 +22,7 @@
     <string name="imput_telefone">Telefone</string>
     <string name="imput_email">E-mail</string>
     <string name="menu_pais">País</string>
-    <string name="mensagem_sucesso">O seu grupo foi adicionado com sucesso!</string>
+    <string name="mensagem_sucesso">O seu grupo foi adicionado com sucesso! Cliquem em sim para ver como ficou.</string>
     <string name="menu_categoria">Categoria</string>
     <string name="menu_tipo">Tipo</string>
     <string name="pub_id">ca-app-pub-8817634033676287~7981741263</string>
@@ -39,5 +39,6 @@
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
     <string name="msg_token_fmt">\"TOKEN DO FIREBASE\"</string>
+    <string name="net_work_error">Falha de rede. Verifique sua conexão com a Internet e tente novamente.</string>
 
 </resources>

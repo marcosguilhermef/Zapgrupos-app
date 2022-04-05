@@ -74,7 +74,11 @@ public class ListaDeGruposAdapter extends BaseAdapter {
             Boolean exibir = (grupo.getSensivel() == false) || (grupo.getSensivel() == null);
 
             if(exibir) {
-                Glide.with(context).load(holder.url).centerCrop().placeholder(R.drawable.ic_baseline_error_outline_24).into(holder.imagem);
+                Glide.with(context)
+                        .load(holder.url)
+                        .centerCrop()
+                        .placeholder(R.drawable.ic_baseline_error_outline_24)
+                        .into(holder.imagem);
             }
 
         return convertView;

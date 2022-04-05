@@ -5,11 +5,16 @@ import java.util.List;
 
 public class Grupo {
     public String _id;
+    /* url e link são a mesma coisa, mais tem funções diferentes. Verificar isso posteriormente*/
     public String url;
+    public String link;
+    public String email;
+    public String telefone;
     public String titulo;
     public String descricao;
     public String tipo;
     public String categoria;
+    public String pais;
     public Long vizita;
     public Boolean sensivel;
     public List<String> img;
@@ -30,6 +35,38 @@ public class Grupo {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public String getTitulo() {
