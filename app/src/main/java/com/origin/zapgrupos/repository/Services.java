@@ -22,6 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Services {
@@ -31,11 +32,15 @@ public class Services {
         retrofit = new Retrofit
                 .Builder()
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .baseUrl("https://zapgrupos.xyz/")
                 .build();
         service = retrofit.create(ZapgruposService.class);
     }
 
+    public ZapgruposService getService(){
+        return service;
+    }
     public void getCategories(
             MutableLiveData<CategoriaModel> livedata,
             MutableLiveData<ErrorMensage> livedataErro){

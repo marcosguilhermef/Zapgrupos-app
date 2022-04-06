@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements onChangeTitle {
         NavigationView navigationView = binding.navView;
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_adicionar_grupo, R.id.nav_slideshow, R.id.nav_gerar_mensagem_sem_contato,R.id.nav_gerar_link)
+                R.id.nav_home, R.id.nav_adicionar_grupo, R.id.nav_gerar_mensagem_sem_contato,R.id.nav_gerar_link)
                 .setOpenableLayout(drawer)
                 .build();
 

@@ -6,16 +6,23 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
@@ -30,105 +37,92 @@ import com.origin.zapgrupos.repository.Services;
 import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
 
 
-
 public class ListaGruposPorCategoriaFragment extends Fragment implements onChangeTitle {
 
     private FragmentListaGruposPorCategoriaBinding binding;
     private onChangeTitle mListener;
-    private ListaDeGruposPorCategoriaViewModel viewModel;
+    private GruposViewModel viewModel;
     private Bundle bundle;
     private InterstitialAd mInterstitialAd;
     private Parcelable state;
 
+    /*
+     * Algumas mudanças devem ser implementadas aqui. Algumas delas para adequar o código a seguir o padrão recomendado pelo google.
+     * 1) Subir viewModel e seus observables para o ciclo de vida onCreate();
+     * 2) Armazenar dados de carregamento no banco de dados;
+     *
+     * */
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             bundle = new Bundle();
         }
+        Adapter adapter = new Adapter(new Comparator(), getContext(), getArguments().getString("categoria"));
 
-        viewModel = new ViewModelProvider(this).get(ListaDeGruposPorCategoriaViewModel.class);
+        ViewModelProvider.Factory factory = new ViewModelProvider.Factory() {
+            @NonNull
+            @Override
+            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+                return (T) new GruposViewModel(getArguments().getString("categoria"));
+            }
+        };
+
+
+        viewModel = new ViewModelProvider(this, factory).get(GruposViewModel.class);
+
+        //viewModel = new ViewModelProvider(this).get(ListaDeGruposPorCategoriaViewModel.class);
 
         mListener.onFragmentInteraction(getArguments().getString("categoria"));
+
+
         binding = FragmentListaGruposPorCategoriaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        viewModel.getDownloaded().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if(!aBoolean){
-                    makeRequest();
-                    viewModel.setDownloaded(true);
-                }
-            }
+        viewModel.pagingDataFlow.subscribe(grupoPagingSource -> {
+            adapter.submitData(getLifecycle(), grupoPagingSource);
         });
-        viewModel.getGrupos().observe(getViewLifecycleOwner(), new Observer<ListaDeGrupos>() {
-            @Override
-            public void onChanged(@Nullable ListaDeGrupos grupos) {
-                if(grupos != null){
-                    MontarListaDeGrupos(grupos);
-                    binding.progressBarGrupos.setVisibility(binding.progressBarGrupos.GONE);
-                }
-            }
-        });
-        binding.listViewGrupos.setOnItemClickListener(onClickItemCategory());
+
+        //GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        adapter.withLoadStateHeader(new GruposLoadState(v -> {
+            adapter.retry();
+        }));
+
+        adapter.withLoadStateFooter(
+                new GruposLoadState(v -> {
+                    adapter.retry();
+                })
+        );
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        //binding.recyclerViewMovies.addItemDecoration(new GridSpace(2, 20, true));
+        binding.recyclerViewMovies.setAdapter(
+                adapter
+        );
+
+        binding.recyclerViewMovies.setLayoutManager(linearLayoutManager);
+
         return root;
     }
 
-    private void makeRequest(){
-        Services request = new Services();
-        request.getGroupsForCategory(
-                getArguments().getString("categoria"),
-                viewModel.getGrupos(),
-                viewModel.getErro()
-        );
-    }
 
-    private void MontarListaDeGrupos(ListaDeGrupos grupos){
-        ListView listView = binding.listViewGrupos;
-        listView.setAdapter(new ListaDeGruposAdapter(getActivity(), grupos.getData()));
-    }
-
-    private AdapterView.OnItemClickListener onClickItemCategory(){
-        return new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Object o = binding.listViewGrupos.getItemAtPosition(position);
-                Grupo group = (Grupo) o;
-                bundle.putString("_id",group.get_id());
-                bundle.putString("titulo",group.getTitulo());
-                bundle.putString("url",group.getUrl());
-                bundle.putString("img",group.getImg() != null ? group.getImg().get(0) : null);
-                bundle.putString("categoria",group.getCategoria());
-                bundle.putString("descricao",group.getDescricao());
-                bundle.putBoolean("sensivel",group.getSensivel());
-                Navigation.findNavController(v).navigate(R.id.nav_grupo, bundle);
-            }
-        };
-    }
     @Override
     public void onPause() {
         super.onPause();
-        state = binding.listViewGrupos.onSaveInstanceState();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(state != null){
-            binding.listViewGrupos.onRestoreInstanceState(state);
-        }
+
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
+
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
-        binding = null;
-        viewModel.setCategoria(null);
-        viewModel.setDownloaded(false);
-        state = null;
+        viewModel.pagingDataFlow = null;
     }
 
     @Override
@@ -143,16 +137,16 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     }
 
     @Override
-    public void onViewCreated(View view, Bundle bundle){
+    public void onViewCreated(View view, Bundle bundle) {
         AdRequest adRequest = new AdRequest.Builder().build();
-        InterstitialAd.load(getContext(),getString(R.string.banner_ad_unit_id_intersticial), adRequest,
+        InterstitialAd.load(getContext(), getString(R.string.banner_ad_unit_id_intersticial), adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
                         // The mInterstitialAd reference will be null until
                         // an ad is loaded.
                         mInterstitialAd = interstitialAd;
-                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
+                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                             @Override
                             public void onAdDismissedFullScreenContent() {
                                 Log.d("Ads TAG", "The ad was dismissed.");
@@ -174,7 +168,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
                     @Override
                     public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                         // Handle the error
-                        Log.i("Ads", "mInterstitialAd "+loadAdError.getMessage());
+                        Log.i("Ads", "mInterstitialAd " + loadAdError.getMessage());
                         mInterstitialAd = null;
                     }
                 });
@@ -185,6 +179,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     public void onStart() {
         super.onStart();
     }
+
     @Override
     public void onDetach() {
         super.onDetach();

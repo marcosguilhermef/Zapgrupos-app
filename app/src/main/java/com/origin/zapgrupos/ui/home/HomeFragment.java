@@ -21,7 +21,10 @@ import com.origin.zapgrupos.models.Error.ErrorMensage;
 import com.origin.zapgrupos.repository.Services;
 
 
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class HomeFragment extends Fragment {
 
@@ -53,7 +56,7 @@ public class HomeFragment extends Fragment {
                 if(categoriaModel != null){
                     MontarListaDeCategorias(categoriaModel);
                     progressBar.setVisibility(progressBar.GONE);
-                    binding.constraintError.setVisibility(binding.constraintError.INVISIBLE);
+                    binding.includeError.constraintError.setVisibility(binding.includeError.constraintError.INVISIBLE);
                 }
             }
         }
@@ -65,8 +68,9 @@ public class HomeFragment extends Fragment {
                 if(errorMensage != null){
                     listView.setVisibility(listView.INVISIBLE);
                     progressBar.setVisibility(progressBar.GONE);
-                    binding.constraintError.setVisibility(binding.constraintError.VISIBLE);
-                    binding.textView2.setText(R.string.net_work_error);
+                    binding.includeError.constraintError.setVisibility(binding.includeError.constraintError.VISIBLE);
+                    TextView t = (TextView) binding.includeError.constraintError.findViewById(R.id.textView2);
+                    t.setText(R.string.net_work_error);
                 }
             }
         });
