@@ -1,5 +1,7 @@
 package com.origin.zapgrupos.repository;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.paging.PagingState;
@@ -29,8 +31,9 @@ public class PagingSource extends RxPagingSource<Integer, Grupo> {
     public Single<LoadResult<Integer, Grupo>> loadSingle(@NotNull LoadParams<Integer> loadParams) {
         try {
             int page = loadParams.getKey() != null ? loadParams.getKey() : 1;
-            return services.getService()
-                    .getFromCategoryLF(categoria,100,page)
+
+            Single<ListaDeGrupos> response = services.getService().getFromCategoryLF(categoria,50,page);
+            return response
                     .subscribeOn(Schedulers.io())
                     .map(ListaDeGrupos::getData)
                     .map( grupo -> toLoadResult(grupo, page))
@@ -49,4 +52,5 @@ public class PagingSource extends RxPagingSource<Integer, Grupo> {
     public Integer getRefreshKey(@NonNull PagingState<Integer, Grupo> pagingState) {
         return null;
     }
+
 }

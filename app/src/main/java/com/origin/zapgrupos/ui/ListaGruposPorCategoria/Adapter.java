@@ -26,12 +26,10 @@ public class Adapter extends PagingDataAdapter<Grupo, Adapter.AdapterViewHolder>
     // Define Movie ViewType
     public static final int MOVIE_ITEM = 1;
     public final Context context;
-    public final String categoria;
 
-    public Adapter(@NotNull DiffUtil.ItemCallback<Grupo> diffCallback, Context context, String categoria) {
+    public Adapter(@NotNull DiffUtil.ItemCallback<Grupo> diffCallback, Context context) {
         super(diffCallback);
         this.context = context;
-        this.categoria = categoria;
     }
 
     @NonNull

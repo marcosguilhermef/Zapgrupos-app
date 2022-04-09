@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    android:orientation="vertical">
 
     <ProgressBar
-        android:id="@+id/progressBar_grupos"
-        style="?android:attr/progressBarStyleLarge"
+        android:id="@+id/progressBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/errorMsg"
@@ -28,6 +22,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Retry" />
+        android:text="Repetir" />
 </LinearLayout>
-

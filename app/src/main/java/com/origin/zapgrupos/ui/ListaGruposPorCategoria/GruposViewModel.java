@@ -20,9 +20,8 @@ import kotlinx.coroutines.CoroutineScope;
 public class GruposViewModel extends ViewModel {
     // Define Flowable for movies
     public Flowable<PagingData<Grupo>> pagingDataFlow;
-
+    public Boolean loading;
     public GruposViewModel(String categoria) {
-        Log.i("Recriado","--------------------------------------[RECRIADO]------------------------------");
         init(categoria);
     }
  
@@ -34,11 +33,10 @@ public class GruposViewModel extends ViewModel {
         // Create new Pager
         Pager<Integer, Grupo> pager = new Pager(
                 // Create new paging config
-                new PagingConfig(100, // pageSize - Count of items in one page
-                        50, // prefetchDistance - Number of items to prefetch
-                        true, // enablePlaceholders - Enable placeholders for data which is not yet loaded
-                        20, // initialLoadSize - Count of items to be loaded initially
-                        20000),// maxSize - Count of total items to be shown in recyclerview
+                new PagingConfig(50, // pageSize - Count of items in one page
+                        30, // prefetchDistance - Number of items to prefetch
+                        false, // enablePlaceholders - Enable placeholders for data which is not yet loaded
+                        50),// maxSize - Count of total items to be shown in recyclerview
                 () -> grupoPagingSource); // set paging source
  
         // inti Flowable

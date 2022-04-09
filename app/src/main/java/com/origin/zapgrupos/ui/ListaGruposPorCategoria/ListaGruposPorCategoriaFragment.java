@@ -1,25 +1,18 @@
 package com.origin.zapgrupos.ui.ListaGruposPorCategoria;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.paging.LoadState;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,11 +23,12 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.origin.zapgrupos.R;
-import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Grupo;
-import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.ListaDeGrupos;
 import com.origin.zapgrupos.databinding.FragmentListaGruposPorCategoriaBinding;
-import com.origin.zapgrupos.repository.Services;
+import com.origin.zapgrupos.repository.PagingSource;
 import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
+
+import io.reactivex.rxjava3.functions.Action;
+import io.reactivex.rxjava3.functions.Consumer;
 
 
 public class ListaGruposPorCategoriaFragment extends Fragment implements onChangeTitle {
@@ -45,6 +39,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     private Bundle bundle;
     private InterstitialAd mInterstitialAd;
     private Parcelable state;
+    Adapter adapter;
 
     /*
      * Algumas mudanças devem ser implementadas aqui. Algumas delas para adequar o código a seguir o padrão recomendado pelo google.
@@ -52,11 +47,14 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
      * 2) Armazenar dados de carregamento no banco de dados;
      *
      * */
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         if (savedInstanceState == null) {
             bundle = new Bundle();
         }
-        Adapter adapter = new Adapter(new Comparator(), getContext(), getArguments().getString("categoria"));
+        adapter = new Adapter(new Comparator(), getContext());
 
         ViewModelProvider.Factory factory = new ViewModelProvider.Factory() {
             @NonNull
@@ -66,39 +64,40 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
             }
         };
 
-
         viewModel = new ViewModelProvider(this, factory).get(GruposViewModel.class);
 
-        //viewModel = new ViewModelProvider(this).get(ListaDeGruposPorCategoriaViewModel.class);
-
         mListener.onFragmentInteraction(getArguments().getString("categoria"));
-
-
-        binding = FragmentListaGruposPorCategoriaBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
         viewModel.pagingDataFlow.subscribe(grupoPagingSource -> {
             adapter.submitData(getLifecycle(), grupoPagingSource);
         });
+    }
 
-        //GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-        adapter.withLoadStateHeader(new GruposLoadState(v -> {
-            adapter.retry();
-        }));
 
-        adapter.withLoadStateFooter(
-                new GruposLoadState(v -> {
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        binding = FragmentListaGruposPorCategoriaBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+
+        binding.recyclerViewMovies.setAdapter(adapter.withLoadStateFooter(new GruposLoadState(v -> {
                     adapter.retry();
                 })
-        );
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        //binding.recyclerViewMovies.addItemDecoration(new GridSpace(2, 20, true));
-        binding.recyclerViewMovies.setAdapter(
-                adapter
-        );
+        ));
+
+        adapter.addLoadStateListener(loadStates -> {
+            LoadState refreshLoadState = loadStates.getRefresh();
+            if(refreshLoadState instanceof LoadState.Loading){
+                binding.progressBarGrupos.setVisibility(View.VISIBLE);
+            }else{
+                binding.progressBarGrupos.setVisibility(View.GONE);
+            }
+            return null;
+        });
+
 
         binding.recyclerViewMovies.setLayoutManager(linearLayoutManager);
-
         return root;
     }
 

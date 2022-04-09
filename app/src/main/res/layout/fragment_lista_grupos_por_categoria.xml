@@ -10,7 +10,7 @@
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent" />
     <!--
         <ListView
