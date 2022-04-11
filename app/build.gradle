@@ -9,10 +9,9 @@ android {
     defaultConfig {
         applicationId "com.origin.zapgrupos"
         minSdk 24
-        targetSdk 31
-        versionCode 18
-        versionName "1.1.0"
-
+        targetSdk 32
+        versionCode 19
+        versionName "1.1.0f"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

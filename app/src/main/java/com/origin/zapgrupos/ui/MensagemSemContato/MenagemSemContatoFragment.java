@@ -112,6 +112,11 @@ public class MenagemSemContatoFragment extends Fragment {
     @Override
     public void onDetach(){
         super.onDetach();
+    }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
         adView.destroy();
+
     }
 }

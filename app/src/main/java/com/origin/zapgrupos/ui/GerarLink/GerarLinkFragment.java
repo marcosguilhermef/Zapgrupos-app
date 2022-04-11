@@ -59,11 +59,16 @@ public class GerarLinkFragment extends Fragment {
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
     }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        adView.destroy();
+
+    }
 
     @Override
     public void onDetach(){
         super.onDetach();
-        adView.destroy();
     }
 
 }

@@ -250,8 +250,7 @@ public class AdicionarGrupoFragment extends Fragment {
                 new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        // The mInterstitialAd reference will be null until
-                        // an ad is loaded.
+
                         mInterstitialAd = interstitialAd;
                         mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
                             @Override

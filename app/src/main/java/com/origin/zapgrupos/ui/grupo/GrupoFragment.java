@@ -145,13 +145,17 @@ public class GrupoFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+        //binding = null;
     }
 
     @Override
     public void onDetach(){
         super.onDetach();
-        adView.destroy();
     }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        adView.destroy();
 
+    }
 }
