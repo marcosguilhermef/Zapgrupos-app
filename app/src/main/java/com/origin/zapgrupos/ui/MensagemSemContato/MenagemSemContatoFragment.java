@@ -105,6 +105,7 @@ public class MenagemSemContatoFragment extends Fragment {
     public void onViewCreated(View view, Bundle bundle){
         super.onViewCreated(view,bundle);
         adView = getActivity().findViewById(R.id.adView);
+        adView.setVisibility(View.VISIBLE);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
     }
@@ -117,6 +118,6 @@ public class MenagemSemContatoFragment extends Fragment {
     public void onDestroy(){
         super.onDestroy();
         adView.destroy();
-
+        adView.setVisibility(View.INVISIBLE);
     }
 }
