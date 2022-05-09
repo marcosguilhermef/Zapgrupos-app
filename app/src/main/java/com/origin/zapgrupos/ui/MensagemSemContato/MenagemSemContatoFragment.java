@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import com.google.android.gms.ads.AdView;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentMenagemSemContatoBinding;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.origin.zapgrupos.util.analytics.Analytics;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +62,9 @@ public class MenagemSemContatoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Analytics.ScreenNameSend("Mensagem Sem Contato", getClass().getName());
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);

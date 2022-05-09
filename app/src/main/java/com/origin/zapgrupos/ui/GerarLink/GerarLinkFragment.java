@@ -14,6 +14,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentGerarLinkBinding;
+import com.origin.zapgrupos.util.analytics.Analytics;
 
 public class GerarLinkFragment extends Fragment {
 
@@ -22,6 +23,12 @@ public class GerarLinkFragment extends Fragment {
 
     public GerarLinkFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Analytics.ScreenNameSend("Gerar Link Compartilhamento", getClass().getName());
     }
 
     @Override

@@ -32,6 +32,8 @@ import org.json.JSONException;
 
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.origin.zapgrupos.util.analytics.Analytics;
+
 public class AdicionarGrupoFragment extends Fragment {
 
     final private String url = "https://zapgrupos.xyz/api/add-grupo";
@@ -39,8 +41,15 @@ public class AdicionarGrupoFragment extends Fragment {
     private FragmentAdicionarGrupoBinding binding;
     private InterstitialAd mInterstitialAd;
     private Bundle bundle;
-    public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        Analytics.ScreenNameSend(getActivity().getTitle().toString(), getClass().getName());
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
         if(bundle == null){
             bundle = new Bundle();
         }
@@ -257,15 +266,12 @@ public class AdicionarGrupoFragment extends Fragment {
                             public void onAdDismissedFullScreenContent() {
                                 Log.d("Ads TAG", "The ad was dismissed.");
                             }
-
                             @Override
                             public void onAdFailedToShowFullScreenContent(AdError adError) {
                                 Log.d("Ads TAG", "The ad failed to show.");
                             }
-
                             @Override
                             public void onAdShowedFullScreenContent() {
-
                                 mInterstitialAd = null;
                                 Log.d("Ads TAG", "The ad was shown.");
                             }

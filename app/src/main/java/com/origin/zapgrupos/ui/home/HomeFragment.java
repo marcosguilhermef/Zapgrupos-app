@@ -1,6 +1,7 @@
 package com.origin.zapgrupos.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentHomeBinding;
 import com.origin.zapgrupos.models.Error.ErrorMensage;
 import com.origin.zapgrupos.repository.Services;
+import com.origin.zapgrupos.util.analytics.Analytics;
 
 
 import android.widget.TextView;
@@ -33,6 +35,13 @@ public class HomeFragment extends Fragment {
     private ListView listView;
     private Bundle bundle;
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        Analytics.ScreenNameSend("HOME", getClass().getName());
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(savedInstanceState == null){
             bundle = new Bundle();

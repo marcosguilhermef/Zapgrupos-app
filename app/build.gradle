@@ -5,24 +5,24 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 android {
     compileSdk 32
-
+    compileSdkVersion 31
     defaultConfig {
         applicationId "com.origin.zapgrupos"
         minSdk 24
         targetSdk 32
-        versionCode 19
-        versionName "1.1.0f"
+        versionCode 22
+        versionName "1.1.36"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
@@ -57,6 +57,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-inappmessaging-display'
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.android.gms:play-services-ads:20.6.0'
+    implementation 'com.google.firebase:firebase-messaging-directboot:23.0.3'
+    implementation 'com.google.firebase:firebase-messaging:23.0.3'
 
 
     // Declare the dependencies for the In-App Messaging and Analytics libraries

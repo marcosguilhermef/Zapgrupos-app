@@ -9,6 +9,7 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -17,16 +18,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import com.origin.zapgrupos.databinding.ActivityMainBinding;
 import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
+import com.origin.zapgrupos.util.analytics.Analytics;
 
 public class MainActivity extends AppCompatActivity implements onChangeTitle {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-
+    Analytics ans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ans = new Analytics(this);
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements onChangeTitle {
                 || super.onSupportNavigateUp();
     }
 
-    public void onFragmentInteraction(String title) {
+    public void onFragmentInteraction(@Nullable String title) {
         getSupportActionBar().setTitle(title);
     }
 }

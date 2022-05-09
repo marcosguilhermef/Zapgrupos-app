@@ -23,9 +23,6 @@
     <string name="mensagem_sucesso">Your group has been successfully added! Do you wanna to see it?</string>
     <string name="menu_categoria">Category</string>
     <string name="menu_tipo">Social network</string>
-    <string name="pub_id">ca-app-pub-8817634033676287~7981741263</string>
-    <string name="banner_ad_unit_id">ca-app-pub-8817634033676287/9748132979</string>
-    <string name="banner_ad_unit_id_intersticial">ca-app-pub-8817634033676287/2559277205</string>
     <string name="n_mero">Number Phone</string>
     <string name="texto">Text</string>
     <string name="copiar_link">Copy</string>
@@ -33,10 +30,12 @@
     <string name="numero_helper">Put your phone number</string>
     <string name="texto_compartilhar">Text that you wanna to share</string>
     <string name="abrir_contato">Open contact</string>
-    <string name="helper_numero">Put the phone number that you wanna to talk</string>
+    <string name="helper_numero">Fill with your cellphone that you wanna to talk</string>
     <string name="sim">Yes</string>
     <string name="nao">No</string>
     <string name="msg_token_fmt">\"TOKEN DO FIREBASE\"</string>
     <string name="net_work_error">Network fail. Verify your Internet and Retry again.</string>
-
+    <string name="pub_id">ca-app-pub-8817634033676287~7981741263</string>
+    <string name="banner_ad_unit_id">ca-app-pub-8817634033676287/9748132979</string>
+    <string name="banner_ad_unit_id_intersticial">ca-app-pub-8817634033676287/2559277205</string>
 </resources>

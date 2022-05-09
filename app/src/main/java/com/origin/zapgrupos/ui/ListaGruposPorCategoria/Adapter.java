@@ -84,6 +84,11 @@ public class Adapter extends PagingDataAdapter<Grupo, Adapter.AdapterViewHolder>
                         .centerCrop()
                         .placeholder(R.drawable.ic_baseline_error_outline_24)
                         .into(holder.adapterItemBind.imageViewGrupo);
+            }else{
+                Glide.with(context)
+                        .load(R.drawable.ic_baseline_error_outline_24)
+                        .centerCrop()
+                        .into(holder.adapterItemBind.imageViewGrupo);
             }
         }
     }

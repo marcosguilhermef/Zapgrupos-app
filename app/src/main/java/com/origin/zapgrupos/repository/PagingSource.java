@@ -6,12 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.paging.PagingState;
 import androidx.paging.rxjava3.RxPagingSource;
-//import com.loopwiki.movieground.API.APIClient;
-//import com.loopwiki.movieground.Model.Movie;
-//import com.loopwiki.movieground.Model.MovieResponse;
 import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Grupo;
 import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.ListaDeGrupos;
-import com.origin.zapgrupos.repository.Services;
 
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
@@ -52,5 +48,4 @@ public class PagingSource extends RxPagingSource<Integer, Grupo> {
     public Integer getRefreshKey(@NonNull PagingState<Integer, Grupo> pagingState) {
         return null;
     }
-
 }

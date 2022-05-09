@@ -26,6 +26,7 @@ import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentListaGruposPorCategoriaBinding;
 import com.origin.zapgrupos.repository.PagingSource;
 import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
+import com.origin.zapgrupos.util.analytics.Analytics;
 
 import io.reactivex.rxjava3.functions.Action;
 import io.reactivex.rxjava3.functions.Consumer;
@@ -47,6 +48,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
      * 2) Armazenar dados de carregamento no banco de dados;
      *
      * */
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +68,6 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
 
         viewModel = new ViewModelProvider(this, factory).get(GruposViewModel.class);
 
-        mListener.onFragmentInteraction(getArguments().getString("categoria"));
 
         viewModel.pagingDataFlow.subscribe(grupoPagingSource -> {
             adapter.submitData(getLifecycle(), grupoPagingSource);
@@ -100,7 +101,6 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
         binding.recyclerViewMovies.setLayoutManager(linearLayoutManager);
         return root;
     }
-
 
     @Override
     public void onPause() {
@@ -137,6 +137,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
 
     @Override
     public void onViewCreated(View view, Bundle bundle) {
+        mListener.onFragmentInteraction(getArguments().getString("categoria"));
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(getContext(), getString(R.string.banner_ad_unit_id_intersticial), adRequest,
                 new InterstitialAdLoadCallback() {
@@ -177,6 +178,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     @Override
     public void onStart() {
         super.onStart();
+        Analytics.ScreenNameSend(getArguments().getString("categoria"),this.getClass().getName());
     }
 
     @Override

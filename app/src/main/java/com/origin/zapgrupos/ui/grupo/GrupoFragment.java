@@ -1,5 +1,6 @@
 package com.origin.zapgrupos.ui.grupo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentGrupoBinding;
+import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
+import com.origin.zapgrupos.util.analytics.Analytics;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +29,7 @@ import com.origin.zapgrupos.databinding.FragmentGrupoBinding;
 public class GrupoFragment extends Fragment {
     private FragmentGrupoBinding binding;
     private AdView adView;
+    private onChangeTitle mListener;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,6 +87,7 @@ public class GrupoFragment extends Fragment {
             mParam7 = getArguments().getBoolean(ARG_PARAM7);
             mParam8 = getArguments().getString(ARG_PARAM8);
         }
+        Analytics.ScreenNameSend(mParam1+" ("+mParam6+")",this.getClass().getName());
     }
 
     @Override
@@ -105,6 +110,7 @@ public class GrupoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.i("url:", mParam2);
+                Analytics.join(mParam6,mParam1);
                 Intent viewIntent =
                         new Intent("android.intent.action.VIEW",
                                 Uri.parse( mParam2 ));
@@ -118,6 +124,7 @@ public class GrupoFragment extends Fragment {
             public void onClick(View view) {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
+                Analytics.share(mParam6,mParam1);
                 mParam5 =mParam5.replace(" ","-");
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "" +
                         "Olá, eu obti esse grupo através do zapgrupos. " +
@@ -128,6 +135,7 @@ public class GrupoFragment extends Fragment {
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);
 
+
             }
         });
 
@@ -137,10 +145,11 @@ public class GrupoFragment extends Fragment {
 
     public void onViewCreated(View view, Bundle bundle){
         super.onViewCreated(view,bundle);
-        adView = getActivity().findViewById(R.id.adView);
+        mListener.onFragmentInteraction(mParam1);
+        /*adView = getActivity().findViewById(R.id.adView);
         adView.setVisibility(View.VISIBLE);
         AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
+        adView.loadAd(adRequest);*/
     }
 
     @Override
@@ -150,13 +159,20 @@ public class GrupoFragment extends Fragment {
     }
 
     @Override
-    public void onDetach(){
-        super.onDetach();
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (onChangeTitle) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
+
     @Override
     public void onDestroy(){
         super.onDestroy();
-        adView.destroy();
-        adView.setVisibility(View.INVISIBLE);
+        /*adView.destroy();
+        adView.setVisibility(View.INVISIBLE);*/
     }
 }
