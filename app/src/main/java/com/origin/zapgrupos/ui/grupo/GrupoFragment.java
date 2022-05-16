@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -14,8 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentGrupoBinding;
 import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
@@ -30,6 +36,7 @@ public class GrupoFragment extends Fragment {
     private FragmentGrupoBinding binding;
     private AdView adView;
     private onChangeTitle mListener;
+    private InterstitialAd mInterstitialAd;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -88,6 +95,7 @@ public class GrupoFragment extends Fragment {
             mParam8 = getArguments().getString(ARG_PARAM8);
         }
         Analytics.ScreenNameSend(mParam1+" ("+mParam6+")",this.getClass().getName());
+        initADS();
     }
 
     @Override
@@ -174,5 +182,41 @@ public class GrupoFragment extends Fragment {
         super.onDestroy();
         /*adView.destroy();
         adView.setVisibility(View.INVISIBLE);*/
+    }
+    public void initADS(){
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(getContext(), getString(R.string.banner_ad_unit_id_intersticial), adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                Log.d("Ads TAG", "The ad was dismissed.");
+                            }
+
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                Log.d("Ads TAG", "The ad failed to show.");
+                            }
+
+                            @Override
+                            public void onAdShowedFullScreenContent() {
+                                mInterstitialAd = null;
+                            }
+                        });
+                        mInterstitialAd.show(getActivity());
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.i("Ads", "mInterstitialAd " + loadAdError.getMessage());
+                        mInterstitialAd = null;
+                    }
+                });
     }
 }

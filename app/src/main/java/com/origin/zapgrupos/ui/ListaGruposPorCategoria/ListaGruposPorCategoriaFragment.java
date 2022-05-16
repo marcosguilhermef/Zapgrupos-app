@@ -68,10 +68,13 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
 
         viewModel = new ViewModelProvider(this, factory).get(GruposViewModel.class);
 
-
         viewModel.pagingDataFlow.subscribe(grupoPagingSource -> {
             adapter.submitData(getLifecycle(), grupoPagingSource);
         });
+
+        initADS();
+
+
     }
 
 
@@ -138,6 +141,22 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     @Override
     public void onViewCreated(View view, Bundle bundle) {
         mListener.onFragmentInteraction(getArguments().getString("categoria"));
+
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Analytics.ScreenNameSend(getArguments().getString("categoria"),this.getClass().getName());
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+    public void initADS(){
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(getContext(), getString(R.string.banner_ad_unit_id_intersticial), adRequest,
                 new InterstitialAdLoadCallback() {
@@ -172,19 +191,6 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
                         mInterstitialAd = null;
                     }
                 });
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Analytics.ScreenNameSend(getArguments().getString("categoria"),this.getClass().getName());
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     @Override

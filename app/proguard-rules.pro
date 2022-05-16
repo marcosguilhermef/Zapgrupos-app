@@ -28,6 +28,10 @@
     public static final ** CREATOR;
 }
 
+-dontwarn com.google.android.gms.**
+-keep class com.google.android.gms.**{ *; }
+-keep interface com.google.android.gms.** { *; }
+
 # Add project specific ProGuard rules here.
 # By default, the flags in this file are appended to flags specified
 # in /home/chris/Android/Sdk/tools/proguard/proguard-android.txt
@@ -86,7 +90,6 @@
 # For using GSON @Expose annotation
 -keepattributes *Annotation*
 # Gson specific classes
--keep class sun.misc.Unsafe { *; }
 -keep class com.google.gson.stream.** { *; }
 
 # Prevent proguard from stripping interface information from TypeAdapterFactory,
@@ -108,17 +111,11 @@
 -keep class com.sun.** {*;}
 -keep class myjava.** {*;}
 -keep class org.apache.harmony.** {*;}
--keep public class MailClient {*;}
 -dontwarn com.sun.mail.**
 -dontwarn java.awt.**
 -dontwarn java.beans.Beans
 -dontwarn javax.security.**
 
-# Otto Library
--keepclassmembers class ** {
-    @com.squareup.otto.Subscribe public *;
-    @com.squareup.otto.Produce public *;
-}
 
 # Remove logs, don't forget to use 'proguard-android-optimize.txt' file in build.gradle
 -assumenosideeffects class android.util.Log {

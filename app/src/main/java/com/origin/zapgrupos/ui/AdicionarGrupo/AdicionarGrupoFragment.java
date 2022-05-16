@@ -46,6 +46,7 @@ public class AdicionarGrupoFragment extends Fragment {
     public void onStart(){
         super.onStart();
         Analytics.ScreenNameSend(getActivity().getTitle().toString(), getClass().getName());
+        initADS();
     }
 
     @Override
@@ -253,27 +254,31 @@ public class AdicionarGrupoFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle bundle){
+    public void onViewCreated(View view, Bundle bundle){ }
+
+    public void initADS(){
         AdRequest adRequest = new AdRequest.Builder().build();
-        InterstitialAd.load(getContext(),getString(R.string.banner_ad_unit_id_intersticial), adRequest,
+        InterstitialAd.load(getContext(), getString(R.string.banner_ad_unit_id_intersticial), adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
                         mInterstitialAd = interstitialAd;
-                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
+                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                             @Override
                             public void onAdDismissedFullScreenContent() {
                                 Log.d("Ads TAG", "The ad was dismissed.");
                             }
+
                             @Override
                             public void onAdFailedToShowFullScreenContent(AdError adError) {
                                 Log.d("Ads TAG", "The ad failed to show.");
                             }
+
                             @Override
                             public void onAdShowedFullScreenContent() {
                                 mInterstitialAd = null;
-                                Log.d("Ads TAG", "The ad was shown.");
                             }
                         });
                         mInterstitialAd.show(getActivity());
@@ -282,13 +287,10 @@ public class AdicionarGrupoFragment extends Fragment {
                     @Override
                     public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                         // Handle the error
-                        Log.i("Ads", "mInterstitialAd "+loadAdError.getMessage());
+                        Log.i("Ads", "mInterstitialAd " + loadAdError.getMessage());
                         mInterstitialAd = null;
                     }
                 });
-
-
-
     }
 
     @Override
