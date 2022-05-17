@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 
+import com.adcolony.sdk.AdColonyAppOptions;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
@@ -19,6 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.origin.zapgrupos.databinding.ActivityMainBinding;
 import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
 import com.origin.zapgrupos.util.analytics.Analytics;
+//...
+
+
 
 public class MainActivity extends AppCompatActivity implements onChangeTitle {
 

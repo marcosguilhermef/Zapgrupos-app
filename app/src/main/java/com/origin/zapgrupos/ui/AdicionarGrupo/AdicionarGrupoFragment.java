@@ -46,9 +46,13 @@ public class AdicionarGrupoFragment extends Fragment {
     public void onStart(){
         super.onStart();
         Analytics.ScreenNameSend(getActivity().getTitle().toString(), getClass().getName());
-        initADS();
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        initADS();
+    }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
         if(bundle == null){
