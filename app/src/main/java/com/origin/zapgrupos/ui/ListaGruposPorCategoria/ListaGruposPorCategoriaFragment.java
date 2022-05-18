@@ -48,6 +48,13 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
      * 2) Armazenar dados de carregamento no banco de dados;
      *
      * */
+    @Override
+    public void onStart() {
+        super.onStart();
+        Analytics.ScreenNameSend(getArguments().getString("categoria"), this.getClass().getName());
+        initADS();
+        Log.i("ADSADS","chamando ads");
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,11 +79,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
             adapter.submitData(getLifecycle(), grupoPagingSource);
         });
 
-        initADS();
-
-
     }
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -93,13 +96,13 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
         adapter.addLoadStateListener(loadStates -> {
             LoadState refreshLoadState = loadStates.getRefresh();
             if(refreshLoadState instanceof LoadState.Loading){
-                binding.progressBarGrupos.setVisibility(View.VISIBLE);
+                progressBarVisibility(View.VISIBLE);
             }else{
-                binding.progressBarGrupos.setVisibility(View.GONE);
+                progressBarVisibility(View.GONE);
+                recivleView(View.VISIBLE);
             }
             return null;
         });
-
 
         binding.recyclerViewMovies.setLayoutManager(linearLayoutManager);
         return root;
@@ -141,22 +144,18 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     @Override
     public void onViewCreated(View view, Bundle bundle) {
         mListener.onFragmentInteraction(getArguments().getString("categoria"));
-
-
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Analytics.ScreenNameSend(getArguments().getString("categoria"),this.getClass().getName());
-    }
+
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
-    public void initADS(){
+
+
+    public void initADS() {
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(getContext(), getString(R.string.banner_ad_unit_id_intersticial), adRequest,
                 new InterstitialAdLoadCallback() {
@@ -168,20 +167,20 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
                         mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                             @Override
                             public void onAdDismissedFullScreenContent() {
-                                Log.d("Ads TAG", "The ad was dismissed.");
+
                             }
 
                             @Override
                             public void onAdFailedToShowFullScreenContent(AdError adError) {
-                                Log.d("Ads TAG", "The ad failed to show.");
+
                             }
 
                             @Override
                             public void onAdShowedFullScreenContent() {
-                                mInterstitialAd = null;
+
                             }
                         });
-                        mInterstitialAd.show(getActivity());
+
                     }
 
                     @Override
@@ -189,6 +188,8 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
                         // Handle the error
                         Log.i("Ads", "mInterstitialAd " + loadAdError.getMessage());
                         mInterstitialAd = null;
+                        progressBarVisibility(View.GONE);
+                        recivleView(View.VISIBLE);
                     }
                 });
     }
@@ -198,4 +199,18 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
 
     }
 
+    private void progressBarVisibility(int visibility){
+        binding.loadAds.progressBarGrupos.setVisibility(visibility);
+    }
+    private void recivleView(int visibility){
+        binding.recyclerViewMovies.setVisibility(visibility);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        if(mInterstitialAd != null){
+            mInterstitialAd.show(getActivity());
+        }
+    }
 }

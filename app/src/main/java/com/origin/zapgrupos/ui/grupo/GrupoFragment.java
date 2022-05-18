@@ -95,7 +95,6 @@ public class GrupoFragment extends Fragment {
             mParam8 = getArguments().getString(ARG_PARAM8);
         }
         Analytics.ScreenNameSend(mParam1+" ("+mParam6+")",this.getClass().getName());
-        initADS();
     }
 
     @Override

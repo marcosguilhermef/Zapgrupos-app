@@ -36,7 +36,4 @@
     <string name="nao">Não</string>
     <string name="msg_token_fmt">\"TOKEN DO FIREBASE\"</string>
     <string name="net_work_error">Falha de rede. Verifique sua conexão com a Internet e tente novamente.</string>
-    <string name="pub_id">ca-app-pub-8817634033676287~7981741263</string>
-    <string name="banner_ad_unit_id">ca-app-pub-8817634033676287/9748132979</string>
-    <string name="banner_ad_unit_id_intersticial">ca-app-pub-8817634033676287/2559277205</string>
 </resources>

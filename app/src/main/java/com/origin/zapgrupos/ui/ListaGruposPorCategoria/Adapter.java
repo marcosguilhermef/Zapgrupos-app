@@ -56,11 +56,15 @@ public class Adapter extends PagingDataAdapter<Grupo, Adapter.AdapterViewHolder>
         });
         holder.adapterItemBind.getRoot().setClickable(true);
         holder.adapterItemBind.getRoot().setLongClickable(true);
+        String url = currenntGrupo.getImg() != null ? currenntGrupo.getImg().get(0) : null;
+        Boolean exibir = (currenntGrupo.getSensivel() == false) || (currenntGrupo.getSensivel() == null);
 
         if (currenntGrupo != null) {
 
-            if(currenntGrupo.getTitulo() != null){
+            if(currenntGrupo.getTitulo() != null && exibir){
                 holder.adapterItemBind.textViewTituloGrupo.setText(currenntGrupo.getTitulo());
+            }else{
+                holder.adapterItemBind.textViewTituloGrupo.setText(" ");
             }
 
             if(currenntGrupo.getDescricao() != null){
@@ -74,9 +78,6 @@ public class Adapter extends PagingDataAdapter<Grupo, Adapter.AdapterViewHolder>
             if(currenntGrupo.getTipo().equals("telegram") || currenntGrupo.getTipo().equals("t.me")){
                 holder.adapterItemBind.imageViewTipo.setImageResource(R.drawable.icons8_aplica__o_telegrama_48);
             }
-
-            String url = currenntGrupo.getImg() != null ? currenntGrupo.getImg().get(0) : null;
-            Boolean exibir = (currenntGrupo.getSensivel() == false) || (currenntGrupo.getSensivel() == null);
 
             if(exibir) {
                 Glide.with(context)

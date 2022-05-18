@@ -36,8 +36,4 @@
     <string name="msg_token_fmt">\"TOKEN DO FIREBASE\"</string>
     <string name="net_work_error">Network fail. Verify your Internet and Retry again.</string>
 
-    <string name="pub_id">ca-app-pub-8817634033676287~7981741263</string>
-    <string name="banner_ad_unit_id">ca-app-pub-8817634033676287/9748132979</string>
-    <string name="banner_ad_unit_id_intersticial">ca-app-pub-8817634033676287/2559277205</string>
-
 </resources>
