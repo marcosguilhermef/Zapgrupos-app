@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -26,6 +26,8 @@ import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentGrupoBinding;
 import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
 import com.origin.zapgrupos.util.analytics.Analytics;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +60,8 @@ public class GrupoFragment extends Fragment {
     private String mParam6;
     private Boolean mParam7;
     private String mParam8;
-
+    private static int counterClick = 0;
+    private final int PARSER = 1;
     public GrupoFragment() {
         // Required empty public constructor
     }
@@ -103,6 +106,7 @@ public class GrupoFragment extends Fragment {
 
         binding.grupoTitulo.setText(mParam1 == null ? "" : mParam1);
         binding.grupoDescricao.setText(mParam4 == null ? "" : mParam4);
+        initADS();
         if(mParam7 == false || mParam7 == null || mParam3 == null){
             Glide.with(getContext())
                     .load(mParam3)
@@ -150,19 +154,97 @@ public class GrupoFragment extends Fragment {
         return view;
     }
 
+    private void hideProgressBar(){
+        binding.progressBarGrupos.setVisibility(View.GONE);
+    }
+
+    private void showProgressBar(){
+        binding.progressBarGrupos.setVisibility(View.VISIBLE);
+
+    }
+
+
+
+    private void initADS(){
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        if(mInterstitialAd != null || (counterClick % PARSER == 0) ){
+            fullscreeam();
+            InterstitialAd.load(getContext(), getString(R.string.banner_ad_unit_id_intersticial), adRequest, interticialCallBack());
+            count();
+        }else{
+           hideProgressBar();
+           count();
+        }
+    }
+    private void count(){
+        counterClick++;
+    }
+
+    private InterstitialAdLoadCallback interticialCallBack(){
+        return new InterstitialAdLoadCallback(){
+            public void onAdFailedToLoad( LoadAdError loadAdError) {
+                hideProgressBar();
+                showscream();
+                mInterstitialAd = null;
+            }
+
+            public void onAdLoaded(InterstitialAd interstitialAd) {
+                mInterstitialAd = interstitialAd;
+                mInterstitialAd.show(getActivity());
+                mInterstitialAd.setFullScreenContentCallback(fullScreeeCallBack());
+                mInterstitialAd = null;
+            }
+        };
+    }
+
+    private FullScreenContentCallback fullScreeeCallBack(){
+        return new FullScreenContentCallback() {
+
+            @Override
+            public void onAdClicked() {
+                super.onAdClicked();
+                hideProgressBar();
+                showscream();
+            }
+
+            @Override
+            public void onAdDismissedFullScreenContent() {
+                super.onAdDismissedFullScreenContent();
+                hideProgressBar();
+                showscream();
+            }
+
+            @Override
+            public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                super.onAdFailedToShowFullScreenContent(adError);
+                hideProgressBar();
+                showscream();
+            }
+
+            @Override
+            public void onAdImpression() {
+                super.onAdImpression();
+
+            }
+
+            @Override
+            public void onAdShowedFullScreenContent() {
+                super.onAdShowedFullScreenContent();
+                hideProgressBar();
+                showscream();
+            }
+        };
+    }
+
     public void onViewCreated(View view, Bundle bundle){
         super.onViewCreated(view,bundle);
         mListener.onFragmentInteraction(mParam1);
-        /*adView = getActivity().findViewById(R.id.adView);
-        adView.setVisibility(View.VISIBLE);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);*/
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        //binding = null;
     }
 
     @Override
@@ -176,46 +258,19 @@ public class GrupoFragment extends Fragment {
         }
     }
 
+    private void fullscreeam(){
+        ((AppCompatActivity) requireActivity()).getSupportActionBar().hide();
+
+    }
+
+    private void showscream(){
+        ((AppCompatActivity) requireActivity()).getSupportActionBar().show();
+
+    }
+
     @Override
     public void onDestroy(){
         super.onDestroy();
-        /*adView.destroy();
-        adView.setVisibility(View.INVISIBLE);*/
     }
-    public void initADS(){
-        AdRequest adRequest = new AdRequest.Builder().build();
-        InterstitialAd.load(getContext(), getString(R.string.banner_ad_unit_id_intersticial), adRequest,
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        // The mInterstitialAd reference will be null until
-                        // an ad is loaded.
-                        mInterstitialAd = interstitialAd;
-                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                            @Override
-                            public void onAdDismissedFullScreenContent() {
-                                Log.d("Ads TAG", "The ad was dismissed.");
-                            }
 
-                            @Override
-                            public void onAdFailedToShowFullScreenContent(AdError adError) {
-                                Log.d("Ads TAG", "The ad failed to show.");
-                            }
-
-                            @Override
-                            public void onAdShowedFullScreenContent() {
-                                mInterstitialAd = null;
-                            }
-                        });
-                        mInterstitialAd.show(getActivity());
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-                        Log.i("Ads", "mInterstitialAd " + loadAdError.getMessage());
-                        mInterstitialAd = null;
-                    }
-                });
-    }
 }

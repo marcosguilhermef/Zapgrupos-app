@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Loading" parent="@style/Widget.AppCompat.ProgressBar">
+        <item name="background">@color/white</item>
+    </style>
+</resources>

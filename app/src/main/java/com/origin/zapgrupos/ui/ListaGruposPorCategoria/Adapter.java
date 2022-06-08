@@ -1,7 +1,9 @@
 package com.origin.zapgrupos.ui.ListaGruposPorCategoria;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,12 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Grupo;
 import org.jetbrains.annotations.NotNull;
@@ -26,10 +34,13 @@ public class Adapter extends PagingDataAdapter<Grupo, Adapter.AdapterViewHolder>
     // Define Movie ViewType
     public static final int MOVIE_ITEM = 1;
     public final Context context;
+    Activity activity;
 
-    public Adapter(@NotNull DiffUtil.ItemCallback<Grupo> diffCallback, Context context) {
+
+    public Adapter(@NotNull DiffUtil.ItemCallback<Grupo> diffCallback, Context context, Activity ac) {
         super(diffCallback);
         this.context = context;
+        activity = ac;
     }
 
     @NonNull

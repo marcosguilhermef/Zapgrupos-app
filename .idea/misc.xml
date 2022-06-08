@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/layout/fragment_grupo.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_informacoes_grupo.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_interticial.xml" value="0.14427083333333332" />
         <entry key="app/src/main/res/layout/fragment_lista_grupos_por_categoria.xml" value="0.18840579710144928" />
         <entry key="app/src/main/res/layout/fragment_menagem_sem_contato.xml" value="0.213768115942029" />
         <entry key="app/src/main/res/layout/fragment_network_error.xml" value="0.228125" />

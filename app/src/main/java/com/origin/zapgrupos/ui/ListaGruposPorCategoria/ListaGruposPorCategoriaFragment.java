@@ -52,7 +52,6 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     public void onStart() {
         super.onStart();
         Analytics.ScreenNameSend(getArguments().getString("categoria"), this.getClass().getName());
-        initADS();
         Log.i("ADSADS","chamando ads");
     }
 
@@ -63,7 +62,7 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
         if (savedInstanceState == null) {
             bundle = new Bundle();
         }
-        adapter = new Adapter(new Comparator(), getContext());
+        adapter = new Adapter(new Comparator(), getContext(), getActivity());
 
         ViewModelProvider.Factory factory = new ViewModelProvider.Factory() {
             @NonNull
@@ -155,45 +154,6 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     }
 
 
-    public void initADS() {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        InterstitialAd.load(getContext(), getString(R.string.banner_ad_unit_id_intersticial), adRequest,
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        // The mInterstitialAd reference will be null until
-                        // an ad is loaded.
-                        mInterstitialAd = interstitialAd;
-                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                            @Override
-                            public void onAdDismissedFullScreenContent() {
-
-                            }
-
-                            @Override
-                            public void onAdFailedToShowFullScreenContent(AdError adError) {
-
-                            }
-
-                            @Override
-                            public void onAdShowedFullScreenContent() {
-
-                            }
-                        });
-
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-                        Log.i("Ads", "mInterstitialAd " + loadAdError.getMessage());
-                        mInterstitialAd = null;
-                        progressBarVisibility(View.GONE);
-                        recivleView(View.VISIBLE);
-                    }
-                });
-    }
-
     @Override
     public void onFragmentInteraction(String title) {
 
@@ -209,8 +169,5 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     @Override
     public void onStop(){
         super.onStop();
-        if(mInterstitialAd != null){
-            mInterstitialAd.show(getActivity());
-        }
     }
 }

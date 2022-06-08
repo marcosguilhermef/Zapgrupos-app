@@ -12,5 +12,5 @@
     <color name="Gainsboro">#DCDCDC</color>
     <color name="mtlr_filled_strock_color">#FF03DAC5</color>
     <color name="mtlr_btn_text_color_selector">#FF03DAC5</color>
-
+    <color name="background_load">@color/black</color>
 </resources>

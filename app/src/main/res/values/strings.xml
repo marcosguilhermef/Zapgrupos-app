@@ -3,7 +3,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Zapgrupos</string>
-    <string name="nav_header_subtitle"></string>
+    <string name="nav_header_subtitle" translatable="false"></string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="adicionar_grupo">Feature is not avaibled</string>
@@ -36,7 +36,11 @@
     <string name="msg_token_fmt">\"TOKEN DO FIREBASE\"</string>
     <string name="net_work_error">Network fail. Verify your Internet and Retry again.</string>
     <string name="pub_id" translatable="false">ca-app-pub-8817634033676287~7981741263</string>
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-8817634033676287/9748132979</string>
-    <string name="banner_ad_unit_id_intersticial" translatable="false">ca-app-pub-8817634033676287/2559277205</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-8817634033676287/4474843111</string>
+    <string name="banner_ad_unit_id_intersticial" translatable="false">ca-app-pub-8817634033676287/4888941932</string>
     <string name="carregando" translatable="false">Por favor, aguarde...</string>
+    <string name="aguarde" translatable="false">aguarde</string>
+    <string name="parse" translatable="false">3</string>
+    <string name="facebook_app_id" translatable="false">740335096981400</string>
+
 </resources>

@@ -89,4 +89,12 @@
         android:label="@string/title_mensagem_sem_contato"
         tools:layout="@layout/fragment_menagem_sem_contato" >
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_intersticial"
+        android:name="com.origin.zapgrupos.ui.Intersticial.Interticial"
+        android:label="@string/aguarde"
+        tools:layout="@layout/fragment_interticial"
+        >
+    </fragment>
 </navigation>
