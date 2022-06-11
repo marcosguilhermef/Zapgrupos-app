@@ -1,7 +1,5 @@
 package com.origin.zapgrupos.repository;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.paging.PagingState;
@@ -46,6 +44,7 @@ public class PagingSource extends RxPagingSource<Integer, Grupo> {
     @Nullable
     @Override
     public Integer getRefreshKey(@NonNull PagingState<Integer, Grupo> pagingState) {
+
         return null;
     }
 }

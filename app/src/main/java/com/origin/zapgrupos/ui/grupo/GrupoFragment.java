@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -204,35 +205,45 @@ public class GrupoFragment extends Fragment {
             @Override
             public void onAdClicked() {
                 super.onAdClicked();
-                hideProgressBar();
-                showscream();
             }
 
             @Override
             public void onAdDismissedFullScreenContent() {
                 super.onAdDismissedFullScreenContent();
-                hideProgressBar();
-                showscream();
             }
 
             @Override
             public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
                 super.onAdFailedToShowFullScreenContent(adError);
-                hideProgressBar();
-                showscream();
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideProgressBar();
+                        showscream();
+                    }
+                }, 500);
+
+
             }
 
             @Override
             public void onAdImpression() {
                 super.onAdImpression();
-
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideProgressBar();
+                        showscream();
+                    }
+                }, 500);
             }
 
             @Override
             public void onAdShowedFullScreenContent() {
                 super.onAdShowedFullScreenContent();
-                hideProgressBar();
-                showscream();
             }
         };
     }

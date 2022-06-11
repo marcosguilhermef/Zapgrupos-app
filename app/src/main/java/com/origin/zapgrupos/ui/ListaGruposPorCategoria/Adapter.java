@@ -54,16 +54,14 @@ public class Adapter extends PagingDataAdapter<Grupo, Adapter.AdapterViewHolder>
         Grupo grupo = getItem(position);
 
         holder.adapterItemBind.getRoot().setOnClickListener( (v) ->{
-            Object o = getItem(position);
-            Grupo group = (Grupo) o;
             Bundle bundle = new Bundle();
-            bundle.putString("_id",group.get_id());
-            bundle.putString("titulo",group.getTitulo());
-            bundle.putString("url",group.getUrl());
-            bundle.putString("img",group.getImg() != null ? group.getImg().get(0) : null);
-            bundle.putString("categoria",group.getCategoria());
-            bundle.putString("descricao",group.getDescricao());
-            bundle.putBoolean("sensivel",group.getSensivel());
+            bundle.putString("_id",grupo.get_id());
+            bundle.putString("titulo",grupo.getTitulo());
+            bundle.putString("url",grupo.getUrl());
+            bundle.putString("img",extractImageURL(grupo));
+            bundle.putString("categoria",grupo.getCategoria());
+            bundle.putString("descricao",grupo.getDescricao());
+            bundle.putBoolean("sensivel",grupo.getSensivel());
             Navigation.findNavController(v).navigate(R.id.nav_grupo, bundle);
         });
 
