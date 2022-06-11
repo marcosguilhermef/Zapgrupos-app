@@ -51,7 +51,8 @@ public class Adapter extends PagingDataAdapter<Grupo, Adapter.AdapterViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull AdapterViewHolder holder, int position) {
-        Grupo currenntGrupo = getItem(position);
+        Grupo grupo = getItem(position);
+
         holder.adapterItemBind.getRoot().setOnClickListener( (v) ->{
             Object o = getItem(position);
             Grupo group = (Grupo) o;
@@ -65,44 +66,50 @@ public class Adapter extends PagingDataAdapter<Grupo, Adapter.AdapterViewHolder>
             bundle.putBoolean("sensivel",group.getSensivel());
             Navigation.findNavController(v).navigate(R.id.nav_grupo, bundle);
         });
-        holder.adapterItemBind.getRoot().setClickable(true);
-        holder.adapterItemBind.getRoot().setLongClickable(true);
-        String url = currenntGrupo.getImg() != null ? currenntGrupo.getImg().get(0) : null;
-        Boolean exibir = (currenntGrupo.getSensivel() == false) || (currenntGrupo.getSensivel() == null);
 
-        if (currenntGrupo != null) {
+        if(isSensible(grupo)){
+            configurarCardGrupo(holder.adapterItemBind, grupo);
+        }
+    }
 
-            if(currenntGrupo.getTitulo() != null && exibir){
-                holder.adapterItemBind.textViewTituloGrupo.setText(currenntGrupo.getTitulo());
+    private void configurarCardGrupo(ListItemGrupoBinding cardGrupo, Grupo grupo){
+        final String url = extractImageURL(grupo);
+            if(grupo.getTitulo() != null){
+                cardGrupo.textViewTituloGrupo.setText(grupo.getTitulo());
             }else{
-                holder.adapterItemBind.textViewTituloGrupo.setText(" ");
+                cardGrupo.textViewTituloGrupo.setText(" ");
             }
 
-            if(currenntGrupo.getDescricao() != null){
-                holder.adapterItemBind.textViewDescricaoGrupo.setText(currenntGrupo.getDescricao());
+            if(grupo.getDescricao() != null){
+                cardGrupo.textViewDescricaoGrupo.setText(grupo.getDescricao());
             }
 
-            if(currenntGrupo.getTipo().equals("whatsapp")){
-                holder.adapterItemBind.imageViewTipo.setImageResource(R.drawable.icons8_whatsapp_48);
+            if(grupo.getTipo().equals("whatsapp")){
+                cardGrupo.imageViewTipo.setImageResource(R.drawable.icons8_whatsapp_48);
             }
 
-            if(currenntGrupo.getTipo().equals("telegram") || currenntGrupo.getTipo().equals("t.me")){
-                holder.adapterItemBind.imageViewTipo.setImageResource(R.drawable.icons8_aplica__o_telegrama_48);
+            if(grupo.getTipo().equals("telegram") || grupo.getTipo().equals("t.me")){
+                cardGrupo.imageViewTipo.setImageResource(R.drawable.icons8_aplica__o_telegrama_48);
             }
 
-            if(exibir) {
-                Glide.with(context)
+            Glide.with(context)
                         .load(url)
                         .centerCrop()
                         .placeholder(R.drawable.ic_baseline_error_outline_24)
-                        .into(holder.adapterItemBind.imageViewGrupo);
-            }else{
-                Glide.with(context)
-                        .load(R.drawable.ic_baseline_error_outline_24)
-                        .centerCrop()
-                        .into(holder.adapterItemBind.imageViewGrupo);
-            }
-        }
+                        .into(cardGrupo.imageViewGrupo);
+    }
+
+    private Boolean isSensible(Grupo grupo){
+        Boolean exibir = (grupo.getSensivel() == false) || (grupo.getSensivel() == null);
+        return exibir;
+    }
+
+    private Boolean isEmpety(Grupo grupo){
+       return grupo == null;
+    }
+
+    private String extractImageURL(Grupo grupo){
+        return grupo.getImg() != null ? grupo.getImg().get(0) : null;
     }
 
     @Override
