@@ -1,7 +1,6 @@
 package com.origin.zapgrupos.ui.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +19,11 @@ import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentHomeBinding;
 import com.origin.zapgrupos.models.Error.ErrorMensage;
 import com.origin.zapgrupos.repository.Services;
-import com.origin.zapgrupos.util.analytics.Analytics;
+import com.origin.zapgrupos.until.ads.Analytics;
 
 
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 public class HomeFragment extends Fragment {
 

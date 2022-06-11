@@ -1,13 +1,11 @@
 package com.origin.zapgrupos.ui.MensagemSemContato;
 
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,7 @@ import com.google.android.gms.ads.AdView;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentMenagemSemContatoBinding;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.origin.zapgrupos.util.analytics.Analytics;
+import com.origin.zapgrupos.until.ads.Analytics;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -14,7 +14,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentGerarLinkBinding;
-import com.origin.zapgrupos.util.analytics.Analytics;
+import com.origin.zapgrupos.until.ads.Analytics;
 
 public class GerarLinkFragment extends Fragment {
 

@@ -1,7 +1,6 @@
 package com.origin.zapgrupos.ui.AdicionarGrupo;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentAdicionarGrupoBinding;
 import com.origin.zapgrupos.models.AdiconarGrupo.ErrosResponse;
@@ -31,8 +26,7 @@ import com.origin.zapgrupos.ui.home.HomeViewModel;
 import org.json.JSONException;
 
 import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-import com.origin.zapgrupos.util.analytics.Analytics;
+import com.origin.zapgrupos.until.ads.Analytics;
 
 public class AdicionarGrupoFragment extends Fragment {
 

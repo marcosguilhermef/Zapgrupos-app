@@ -18,21 +18,16 @@ import kotlinx.coroutines.CoroutineScope;
     ViewModel for MainActivity
  */
 public class GruposViewModel extends ViewModel {
-    // Define Flowable for movies
     public Flowable<PagingData<Grupo>> pagingDataFlow;
     public Boolean loading;
     public GruposViewModel(String categoria) {
         init(categoria);
     }
  
-    // Init ViewModel Data
     private void init(String categoria) {
-        // Define Paging Source
         PagingSource grupoPagingSource = new PagingSource(categoria);
  
-        // Create new Pager
         Pager<Integer, Grupo> pager = new Pager(
-                // Create new paging config
                 new PagingConfig(50, // pageSize - Count of items in one page
                         30, // prefetchDistance - Number of items to prefetch
                         false, // enablePlaceholders - Enable placeholders for data which is not yet loaded

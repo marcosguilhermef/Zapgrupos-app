@@ -26,9 +26,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentGrupoBinding;
 import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
-import com.origin.zapgrupos.util.analytics.Analytics;
-
-import java.util.Objects;
+import com.origin.zapgrupos.until.ads.Analytics;
 
 /**
  * A simple {@link Fragment} subclass.

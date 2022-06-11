@@ -14,22 +14,11 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.paging.LoadState;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentListaGruposPorCategoriaBinding;
-import com.origin.zapgrupos.repository.PagingSource;
 import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
-import com.origin.zapgrupos.util.analytics.Analytics;
-
-import io.reactivex.rxjava3.functions.Action;
-import io.reactivex.rxjava3.functions.Consumer;
+import com.origin.zapgrupos.until.ads.Analytics;
 
 
 public class ListaGruposPorCategoriaFragment extends Fragment implements onChangeTitle {
@@ -82,7 +71,6 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         binding = FragmentListaGruposPorCategoriaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -146,13 +134,11 @@ public class ListaGruposPorCategoriaFragment extends Fragment implements onChang
     }
 
 
-
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
-
 
     @Override
     public void onFragmentInteraction(String title) {

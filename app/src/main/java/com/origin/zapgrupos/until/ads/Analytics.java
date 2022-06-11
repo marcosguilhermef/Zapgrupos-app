@@ -1,4 +1,4 @@
-package com.origin.zapgrupos.util.analytics;
+package com.origin.zapgrupos.until.ads;
 
 import android.app.Activity;
 import android.os.Bundle;
