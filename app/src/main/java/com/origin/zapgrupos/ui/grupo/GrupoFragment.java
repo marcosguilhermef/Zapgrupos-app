@@ -203,47 +203,47 @@ public class GrupoFragment extends Fragment {
             @Override
             public void onAdClicked() {
                 super.onAdClicked();
+                Log.i("TESTANDOADS", "onAdClicked");
+                completed();
             }
 
             @Override
             public void onAdDismissedFullScreenContent() {
                 super.onAdDismissedFullScreenContent();
+                Log.i("TESTANDOADS", "onAdDismissedFullScreenContent");
+                completed();
             }
 
             @Override
             public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
                 super.onAdFailedToShowFullScreenContent(adError);
-
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        hideProgressBar();
-                        showscream();
-                    }
-                }, 500);
-
+                Log.i("TESTANDOADS", "onAdFailedToShowFullScreenContent");
+                completed();
 
             }
-
             @Override
             public void onAdImpression() {
                 super.onAdImpression();
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        hideProgressBar();
-                        showscream();
-                    }
-                }, 500);
+                Log.i("TESTANDOADS", "onAdImpression");
             }
 
             @Override
             public void onAdShowedFullScreenContent() {
                 super.onAdShowedFullScreenContent();
+                Log.i("TESTANDOADS", "onAdShowedFullScreenContent");
+            }
+            private void completed(){
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideProgressBar();
+                        showscream();
+                    }
+                }, 500);
             }
         };
+
     }
 
     public void onViewCreated(View view, Bundle bundle){

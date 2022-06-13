@@ -10,6 +10,7 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.Nullable;
+import androidx.core.splashscreen.SplashScreen;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements onChangeTitle {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen.installSplashScreen(this);
+
         super.onCreate(savedInstanceState);
         ans = new Analytics(this);
 
