@@ -33,11 +33,13 @@
     <string name="helper_numero">Fill with your cellphone that you wanna to talk</string>
     <string name="sim">Yes</string>
     <string name="nao">No</string>
+    <string name="oko" translatable="false">Ok</string>
+    <string name="sucessoo" translatable="false">Denuncia feita com sucesso.</string>
     <string name="msg_token_fmt">\"TOKEN DO FIREBASE\"</string>
     <string name="net_work_error">Network fail. Verify your Internet and Retry again.</string>
     <string name="pub_id" translatable="false">ca-app-pub-8817634033676287~7981741263</string>
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-8817634033676287/4474843111</string>
-    <string name="banner_ad_unit_id_intersticial" translatable="false">ca-app-pub-8817634033676287/4888941932</string>
+    <string name="banner_ad_unit_id" translatable="false">/22764566987/509d0918-53bf-4e57-acf1-eed3b5f4ba67</string>
+    <string name="banner_ad_unit_id_intersticial" translatable="false">/22764566987/509d0918-53bf-4e57-acf1-eed3b5f4ba67</string>
     <string name="carregando" translatable="false">Por favor, aguarde...</string>
     <string name="aguarde" translatable="false">aguarde</string>
     <string name="parse" translatable="false">3</string>

@@ -108,6 +108,21 @@
                                 android:text="Compartilhar"
                                 android:textColor="#fff" />
 
+                        </GridLayout>
+                        <GridLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/denunciar"
+                                style="?attr/borderlessButtonStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:backgroundTint="#FF0000"
+                                android:text="Denunciar"
+                                android:textColor="#fff" />
 
                         </GridLayout>
                     </LinearLayout>

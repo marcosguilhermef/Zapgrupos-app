@@ -4,6 +4,8 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -12,6 +14,7 @@ import com.origin.zapgrupos.models.AdiconarGrupo.ErrosResponse;
 import com.origin.zapgrupos.models.AdiconarGrupo.SucessoResponse;
 import com.origin.zapgrupos.models.Categorias.CategoriaModel;
 import com.origin.zapgrupos.models.Error.ErrorMensage;
+import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Denuncia;
 import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Grupo;
 import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.ListaDeGrupos;
 
@@ -69,5 +72,22 @@ public class Services {
                                 livedataErro
                         )
         );
+    }
+
+    public void denunciar(String id){
+        Denuncia d = new Denuncia();
+        d.setId(id);
+        Call<Object> callAsync = service.denuncia(d);
+        callAsync.enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+
+            }
+        });
     }
 }

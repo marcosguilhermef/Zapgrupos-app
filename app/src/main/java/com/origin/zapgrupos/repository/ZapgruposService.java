@@ -6,6 +6,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.origin.zapgrupos.models.AdiconarGrupo.ErrosResponse;
 import com.origin.zapgrupos.models.AdiconarGrupo.SucessoResponse;
 import com.origin.zapgrupos.models.Categorias.CategoriaModel;
+import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Denuncia;
 import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.Grupo;
 import com.origin.zapgrupos.models.ListaDeGruposPorCategoria.ListaDeGrupos;
 
@@ -38,5 +39,7 @@ public interface ZapgruposService {
     Call<SucessoResponse> addGroup(@Body Grupo body);
     @POST("api/grupo/sesivel/{id}")
     Call<Object> markSensivel(@Path("id") String id);
+    @POST("api/denuncias")
+    Call<Object> denuncia(@Body Denuncia id);
 
 }

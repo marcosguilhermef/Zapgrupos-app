@@ -1,15 +1,20 @@
 package com.origin.zapgrupos.ui.grupo;
 
 import android.app.Activity;
+import android.app.Service;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Handler;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +28,10 @@ import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentGrupoBinding;
+import com.origin.zapgrupos.repository.Services;
 import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
 import com.origin.zapgrupos.until.ads.Analytics;
 
@@ -58,9 +65,9 @@ public class GrupoFragment extends Fragment {
     private String mParam5;
     private String mParam6;
     private Boolean mParam7;
-    private String mParam8;
     private static int counterClick = 0;
     private final int PARSER = 1;
+    private GrupoViewModel viewmodel;
     public GrupoFragment() {
         // Required empty public constructor
     }
@@ -94,9 +101,9 @@ public class GrupoFragment extends Fragment {
             mParam5 = getArguments().getString(ARG_PARAM5);
             mParam6 = getArguments().getString(ARG_PARAM6);
             mParam7 = getArguments().getBoolean(ARG_PARAM7);
-            mParam8 = getArguments().getString(ARG_PARAM8);
         }
         Analytics.ScreenNameSend(mParam1+" ("+mParam6+")",this.getClass().getName());
+        viewmodel = new ViewModelProvider(this).get(GrupoViewModel.class);
     }
 
     @Override
@@ -135,7 +142,7 @@ public class GrupoFragment extends Fragment {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 Analytics.share(mParam6,mParam1);
-                mParam5 =mParam5.replace(" ","-");
+                mParam5 = mParam5.replace(" ","-");
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "" +
                         "Olá, eu obti esse grupo através do zapgrupos. " +
                         "Aplicativo que está disponível na playstore! " +
@@ -146,6 +153,19 @@ public class GrupoFragment extends Fragment {
                 startActivity(shareIntent);
 
 
+            }
+        });
+        binding.denunciar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Services s = new Services();
+                s.denunciar(mParam6);
+                new MaterialAlertDialogBuilder(getContext(),R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
+                        .setMessage("Denuncia recebida com sucesso.")
+                        .setPositiveButton("Ok", (vr,i) -> {
+                            vr.cancel();
+                        })
+                        .show();
             }
         });
 
@@ -186,6 +206,7 @@ public class GrupoFragment extends Fragment {
                 hideProgressBar();
                 showscream();
                 mInterstitialAd = null;
+                Log.i("TESTANDOADS",loadAdError.getMessage());
             }
 
             public void onAdLoaded(InterstitialAd interstitialAd) {
@@ -218,6 +239,7 @@ public class GrupoFragment extends Fragment {
             public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
                 super.onAdFailedToShowFullScreenContent(adError);
                 Log.i("TESTANDOADS", "onAdFailedToShowFullScreenContent");
+                Log.i("TESTANDOADS", adError.getMessage());
                 completed();
 
             }
