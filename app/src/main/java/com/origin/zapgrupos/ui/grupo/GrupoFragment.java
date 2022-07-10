@@ -20,6 +20,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.appodeal.ads.Appodeal;
+import com.appodeal.ads.AppodealRequestCallbacks;
+import com.appodeal.ads.InterstitialCallbacks;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
@@ -93,6 +96,7 @@ public class GrupoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Appodeal.initialize(getActivity(), getString(R.string.appodeal_token), Appodeal.INTERSTITIAL);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -108,11 +112,12 @@ public class GrupoFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         binding = FragmentGrupoBinding.inflate(inflater, container, false);
+        initAppOdeal();
 
         binding.grupoTitulo.setText(mParam1 == null ? "" : mParam1);
         binding.grupoDescricao.setText(mParam4 == null ? "" : mParam4);
-        initADS();
         if(mParam7 == false || mParam7 == null || mParam3 == null){
             Glide.with(getContext())
                     .load(mParam3)
@@ -147,7 +152,7 @@ public class GrupoFragment extends Fragment {
                         "Olá, eu obti esse grupo através do zapgrupos. " +
                         "Aplicativo que está disponível na playstore! " +
                         "Entre no link abaixo para acessar esse grupo de whatsapp que eu achei legal: " +
-                        "https://zapgrupos.xyz/"+mParam5+"/"+mParam6 );
+                        "https://zapgrupos.xyz/"+mParam5+"/"+mParam6+"?utm_source=zapgruposApp&utm_medium=referral&utm_campaign=zapgruposapp-ads");
                 sendIntent.setType("text/plain");
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);
@@ -179,10 +184,65 @@ public class GrupoFragment extends Fragment {
 
     private void showProgressBar(){
         binding.progressBarGrupos.setVisibility(View.VISIBLE);
-
     }
 
+    private void initAppOdeal(){
+        Log.w("Appodeal", "initAppOdeal");
 
+        if(!Appodeal.isInitialized(Appodeal.INTERSTITIAL)){
+            Log.w("Appodeal", "Appodeal.initialize");
+            Appodeal.initialize(getActivity(), getString(R.string.appodeal_token), Appodeal.INTERSTITIAL,false);
+        }else{
+            Log.w("Appodeal", "else");
+            showProgressBar();
+            fullscreeam();
+        }
+
+        if(Appodeal.isLoaded(Appodeal.INTERSTITIAL)){
+            Appodeal.show(getActivity(), Appodeal.INTERSTITIAL);
+        }
+
+        Appodeal.setInterstitialCallbacks(new InterstitialCallbacks() {
+            @Override
+            public void onInterstitialLoaded(boolean isPrecache) {
+                hideProgressBar();
+                showscream();
+
+            }
+            @Override
+            public void onInterstitialFailedToLoad() {
+                Log.w("Appodeal", "onInterstitialFailedToLoad");
+                hideProgressBar();
+                showscream();
+            }
+            @Override
+            public void onInterstitialShown() {
+                hideProgressBar();
+                showscream();
+            }
+            @Override
+            public void onInterstitialShowFailed() {
+                hideProgressBar();
+                showscream();            }
+            @Override
+            public void onInterstitialClicked() {
+                hideProgressBar();
+                showscream();
+            }
+            @Override
+            public void onInterstitialClosed() {
+                hideProgressBar();
+                showscream();
+            }
+            @Override
+            public void onInterstitialExpired()  {
+                hideProgressBar();
+                showscream();
+            }
+        });
+
+
+    }
 
     private void initADS(){
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -291,7 +351,6 @@ public class GrupoFragment extends Fragment {
 
     private void fullscreeam(){
         ((AppCompatActivity) requireActivity()).getSupportActionBar().hide();
-
     }
 
     private void showscream(){

@@ -11,8 +11,8 @@ android {
         applicationId "com.origin.zapgrupos"
         minSdk 24
         targetSdk 32
-        versionCode 34
-        versionName "1.4.2"
+        versionCode 37
+        versionName "1.5.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -23,8 +23,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -32,6 +32,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     buildFeatures {
         viewBinding true
     }
@@ -62,11 +63,22 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:20.6.0'
     implementation 'com.google.firebase:firebase-messaging-directboot:23.0.3'
     implementation 'com.google.firebase:firebase-messaging:23.0.3'
+    /*
+    remoção do admob
     implementation 'com.unity3d.ads:unity-ads:4.1.0'
     implementation 'com.google.ads.mediation:unity:4.1.0.0'
     implementation 'com.google.ads.mediation:adcolony:4.7.1.0'
     implementation 'com.google.ads.mediation:facebook:6.10.0.0'
+    */
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
+
+    //appodeal
+    implementation 'com.appodeal.ads.sdk:core:2.11.1'
+    implementation 'com.appodeal.ads.sdk.networks:adcolony:2.11.1.22'
+    implementation 'com.appodeal.ads.sdk.networks:applovin:2.11.1.24'
+    implementation 'com.appodeal.ads.sdk.networks:bidmachine:2.11.1.21'
+    implementation 'com.appodeal.ads.sdk.networks:unity_ads:2.11.1.17'
+
 
     // Declare the dependencies for the In-App Messaging and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies

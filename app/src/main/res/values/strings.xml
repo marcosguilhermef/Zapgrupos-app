@@ -44,5 +44,9 @@
     <string name="aguarde" translatable="false">aguarde</string>
     <string name="parse" translatable="false">3</string>
     <string name="facebook_app_id" translatable="false">740335096981400</string>
+    <string name="channel_name" translatable="false">canal_1</string>
+    <string name="channel_description_1" translatable="false">canal para mensagens padrão</string>
+    <string name="channel_id" translatable="false">1</string>
+    <string name="appodeal_token" translatable="false">"9a5225bb3fa25d42bdb59c539feb45278ff3763b626805d9"</string>
 
 </resources>

@@ -2,13 +2,15 @@ package com.origin.zapgrupos;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.widget.Toast;
 
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.appodeal.ads.Appodeal;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.splashscreen.SplashScreen;
 import androidx.navigation.NavController;
@@ -17,6 +19,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.origin.zapgrupos.databinding.ActivityMainBinding;
 import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
 import com.origin.zapgrupos.until.ads.Analytics;
@@ -36,13 +39,7 @@ public class MainActivity extends AppCompatActivity implements onChangeTitle {
 
         super.onCreate(savedInstanceState);
         ans = new Analytics(this);
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
+        Appodeal.initialize(this, getString(R.string.appodeal_token), Appodeal.INTERSTITIAL,false);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

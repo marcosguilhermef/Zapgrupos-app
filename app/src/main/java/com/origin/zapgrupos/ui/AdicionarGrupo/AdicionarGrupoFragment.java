@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.origin.zapgrupos.R;
 import com.origin.zapgrupos.databinding.FragmentAdicionarGrupoBinding;
 import com.origin.zapgrupos.models.AdiconarGrupo.ErrosResponse;
@@ -25,7 +26,6 @@ import com.origin.zapgrupos.repository.Services;
 import com.origin.zapgrupos.ui.home.HomeViewModel;
 import org.json.JSONException;
 
-import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.origin.zapgrupos.until.ads.Analytics;
 
 public class AdicionarGrupoFragment extends Fragment {
