@@ -11,8 +11,8 @@ android {
         applicationId "com.origin.zapgrupos"
         minSdk 24
         targetSdk 32
-        versionCode 37
-        versionName "1.5.1"
+        versionCode 44
+        versionName "1.5.2-billing"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -23,8 +23,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -42,6 +42,8 @@ android {
 dependencies {
     def retrofit = "2.9.0";
     def paging_version = "3.1.1"
+
+
     //google admob
     implementation 'com.google.firebase:firebase-ads:18.3.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -73,16 +75,14 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
 
     //appodeal
-    implementation 'com.appodeal.ads.sdk:core:2.11.1'
-    implementation 'com.appodeal.ads.sdk.networks:adcolony:2.11.1.22'
-    implementation 'com.appodeal.ads.sdk.networks:applovin:2.11.1.24'
-    implementation 'com.appodeal.ads.sdk.networks:bidmachine:2.11.1.21'
-    implementation 'com.appodeal.ads.sdk.networks:unity_ads:2.11.1.17'
-
-
-    // Declare the dependencies for the In-App Messaging and Analytics libraries
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-
+    implementation 'com.appodeal.ads.sdk:core:3.0.0'
+    implementation 'com.appodeal.ads.sdk.networks:adcolony:3.0.0.3'
+    implementation 'com.appodeal.ads.sdk.networks:applovin:3.0.0.2'
+    implementation 'com.appodeal.ads.sdk.networks:bidmachine:3.0.0.3'
+    implementation 'com.appodeal.ads.sdk.services:firebase:3.0.0.0'
+    implementation 'com.appodeal.ads.sdk.networks:admob:3.0.0.2'
+    implementation 'com.appodeal.ads.sdk.services:stack_analytics:3.0.0.0'
+    implementation 'com.appodeal.ads.sdk.networks:unity_ads:3.0.0.0'
 
     //glide
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
@@ -102,7 +102,8 @@ dependencies {
     implementation "androidx.paging:paging-compose:1.0.0-alpha14"
     implementation "androidx.paging:paging-rxjava3:$paging_version"
 
-
-
+    //billing
+    def billing_version = "5.0.0"
+    implementation "com.android.billingclient:billing:$billing_version"
 
 }

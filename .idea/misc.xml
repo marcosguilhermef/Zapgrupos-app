@@ -24,6 +24,7 @@
         <entry key="app/src/main/res/layout/content_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/error_network.xml" value="0.228125" />
         <entry key="app/src/main/res/layout/fragment_adicionar_grupo.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_assinar.xml" value="0.14" />
         <entry key="app/src/main/res/layout/fragment_gerar_link.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_grupo.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />

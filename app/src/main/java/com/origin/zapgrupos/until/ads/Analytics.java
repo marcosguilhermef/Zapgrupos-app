@@ -8,6 +8,9 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class Analytics {
     public static FirebaseAnalytics mFirebaseAnalytics;
+    public static final String REPORT = "Report";
+    public static final String ADD_GROUP = "add_group";
+
     public Analytics(Activity activity){
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(activity);
     }
@@ -23,6 +26,23 @@ public class Analytics {
         bundle.putString("title",title);
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
     }
+
+    public static void report(String _id, String title){
+        Bundle bundle = new Bundle();
+        bundle.putString("id",_id);
+        bundle.putString("title",title);
+        Log.i( "REPORTED", _id );
+        mFirebaseAnalytics.logEvent(REPORT, bundle);
+    }
+
+    public static void addGroup(Bundle bundle){
+        mFirebaseAnalytics.logEvent(ADD_GROUP, bundle);
+    }
+
+    public static void purchasedItem(Bundle bundle){
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE, bundle);
+    }
+
     public static void join(String _id, String title){
         Bundle bundle = new Bundle();
         bundle.putString("id",_id);

@@ -25,5 +25,10 @@
             android:icon="@drawable/ic_menu_add"
             android:title="@string/menu_adicionar_grupo"
             />
+        <item
+            android:id="@+id/nav_assinar"
+            android:icon="@drawable/ic_baseline_payment_24"
+            android:title="@string/title_assinar"
+            />
     </group>
 </menu>

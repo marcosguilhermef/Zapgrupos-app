@@ -37,6 +37,7 @@ import com.origin.zapgrupos.databinding.FragmentGrupoBinding;
 import com.origin.zapgrupos.repository.Services;
 import com.origin.zapgrupos.ui.custonlistners.onChangeTitle;
 import com.origin.zapgrupos.until.ads.Analytics;
+import com.origin.zapgrupos.until.ads.googleBilling.Billing;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -114,7 +115,7 @@ public class GrupoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentGrupoBinding.inflate(inflater, container, false);
-        initAppOdeal();
+
 
         binding.grupoTitulo.setText(mParam1 == null ? "" : mParam1);
         binding.grupoDescricao.setText(mParam4 == null ? "" : mParam4);
@@ -165,6 +166,7 @@ public class GrupoFragment extends Fragment {
             public void onClick(View v) {
                 Services s = new Services();
                 s.denunciar(mParam6);
+                Analytics.report(mParam6,mParam1);
                 new MaterialAlertDialogBuilder(getContext(),R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
                         .setMessage("Denuncia recebida com sucesso.")
                         .setPositiveButton("Ok", (vr,i) -> {
@@ -173,6 +175,13 @@ public class GrupoFragment extends Fragment {
                         .show();
             }
         });
+
+        if(Billing.hasAds()){
+            initAppOdeal();
+        }else{
+            hideProgressBar();
+            showscream();
+        }
 
         View view = binding.getRoot();
         return view;

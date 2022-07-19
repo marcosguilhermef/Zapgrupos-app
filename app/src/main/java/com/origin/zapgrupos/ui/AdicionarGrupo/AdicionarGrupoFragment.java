@@ -62,8 +62,16 @@ public class AdicionarGrupoFragment extends Fragment {
             @Override
             public void onChanged(SucessoResponse sucessoResponse) {
                 if(sucessoResponse != null){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("_id",sucessoResponse.getId());
+                    bundle.putString("url",sucessoResponse.getUrl());
+                    bundle.putString("img",null);
+                    bundle.putString("categoria",sucessoResponse.getCategoria());
+                    bundle.putString("descricao",sucessoResponse.getDescricao());
+                    bundle.putBoolean("sensivel",true);
+                    bundle.putString("tipo",sucessoResponse.getTipo());
+                    Analytics.addGroup(bundle);
                     mensagemDeSucesso(sucessoResponse);
-
                 }
             }
         } );

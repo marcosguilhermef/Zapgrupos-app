@@ -48,5 +48,13 @@
     <string name="channel_description_1" translatable="false">canal para mensagens padrão</string>
     <string name="channel_id" translatable="false">1</string>
     <string name="appodeal_token" translatable="false">"9a5225bb3fa25d42bdb59c539feb45278ff3763b626805d9"</string>
+    <string name="title_assinar" translatable="false">Remover Anúncios</string>
+    <string name="assinar_1" translatable="false">Remover anúncios por 1 semana</string>
+    <string name="assinar_2" translatable="false">Remover anúncios por 1 mês</string>
+    <string name="assinar_3" translatable="false">Remover anúncios por 3 meses</string>
+    <string name="info_assinatura" translatable="false">Informações Assinatura</string>
+    <string name="contact" translatable="false">Em caso de dúvidas, falhas ou se precisar de ajuda entre em contato por:</string>
+    <string name="email" translatable="false">E-mail: contato@mgjobs.cf</string>
+    <string name="billing">"Não detectamos a uma versão recente do google play store ou você não está logado em uma conta google. Para poder remover os anúncios, tente resolver alguns dos problemas citados e reinicie o app. "</string>
 
 </resources>
